@@ -2,7 +2,9 @@ package com.microfian.prac.mapper;
 
 
 import com.microfian.prac.entity.CAccountItemPO;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CAccountItemPOMapper {
     int deleteByPrimaryKey(Integer id);
 

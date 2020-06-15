@@ -1,7 +1,9 @@
 package com.microfian.prac.mapper;
 
 import com.microfian.prac.entity.CConsumeItemPO;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CConsumeItemPOMapper {
     int deleteByPrimaryKey(String id);
 
