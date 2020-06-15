@@ -19,6 +19,11 @@ public class CMerchantServiceImpl implements CMerchantService {
     @Autowired
     CMerchantPOMapper cMerchantPOMapper;
 
+
+    public static void main(String[] args) {
+        System.out.println(UUID.randomUUID().toString().replace("-", "").toLowerCase());
+    }
+
     @Override
     public int addMerchant(CMerchantPO cMerchantPO) {
         cMerchantPO.setId(UUID.randomUUID().toString().replace("-", "").toLowerCase());
@@ -39,4 +44,6 @@ public class CMerchantServiceImpl implements CMerchantService {
     public List<CMerchantPO> selectMerchant(CMerchantPO cMerchantPO) {
         return null;
     }
+
+
 }

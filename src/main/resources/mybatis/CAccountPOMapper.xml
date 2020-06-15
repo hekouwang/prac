@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microfian.prac.mapper.CAccountPOMapper">
+  <resultMap id="BaseResultMap" type="com.microfian.prac.entity.CAccountPO">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="parent_account_id" jdbcType="VARCHAR" property="parentAccountId" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="account_type" jdbcType="INTEGER" property="accountType" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="is_available" jdbcType="INTEGER" property="isAvailable" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_name, parent_account_id, balance, account_type, create_time, update_time, 
+    is_available, is_deleted, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from c_account
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from c_account
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.po.CAccountPO">
+    insert into c_account (id, account_name, parent_account_id, 
+      balance, account_type, create_time, 
+      update_time, is_available, is_deleted, 
+      user_id)
+    values (#{id,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{parentAccountId,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=DECIMAL}, #{accountType,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR}, #{isAvailable,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, 
+      #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.microfian.prac.entity.CAccountPO">
+    insert into c_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="parentAccountId != null">
+        parent_account_id,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isAvailable != null">
+        is_available,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAccountId != null">
+        #{parentAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvailable != null">
+        #{isAvailable,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.CAccountPO">
+    update c_account
+    <set>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentAccountId != null">
+        parent_account_id = #{parentAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvailable != null">
+        is_available = #{isAvailable,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.CAccountPO">
+    update c_account
+    set account_name = #{accountName,jdbcType=VARCHAR},
+      parent_account_id = #{parentAccountId,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      account_type = #{accountType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      is_available = #{isAvailable,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
