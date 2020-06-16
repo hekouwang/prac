@@ -31,7 +31,7 @@ public class CBusinessController {
             return null;
         }
 
-        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO);
+        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO.getSourceAccount());
 
         if(null ==cAccountPO){
             return null;
@@ -40,9 +40,48 @@ public class CBusinessController {
 
     }
 
-    private CAccountPO checkAccount(CConsumeItemDTO cConsumeItemDTO){
+    @PostMapping(value = "/tranferAccount")
+    public Object tranferAccount(@RequestBody CConsumeItemDTO cConsumeItemDTO){
 
-        return cAccountService.selAccountById(cConsumeItemDTO.getSourceAccount());
+        if(null ==cConsumeItemDTO){
+            return null;
+        }
+        if(StringUtils.isEmpty(cConsumeItemDTO.getSourceAccount())){
+            return null;
+        }
+
+        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO.getSourceAccount());
+        CAccountPO cAccountPO1 = checkAccount(cConsumeItemDTO.getTargetAccount());
+
+        if(null ==cAccountPO){
+            return null;
+        }
+        return cBussinessService.tranferAccount(cConsumeItemDTO,cAccountPO,cAccountPO1);
+
+    }
+
+    @PostMapping(value = "/addOneIncome")
+    public Object addOneIncome(@RequestBody CConsumeItemDTO cConsumeItemDTO){
+
+        if(null ==cConsumeItemDTO){
+            return null;
+        }
+        if(StringUtils.isEmpty(cConsumeItemDTO.getSourceAccount())){
+            return null;
+        }
+
+        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO.getSourceAccount());
+
+        if(null ==cAccountPO){
+            return null;
+        }
+        return cBussinessService.addOneIncome(cConsumeItemDTO,cAccountPO);
+
+    }
+
+    private CAccountPO checkAccount(String  accountId){
+
+        return cAccountService.selAccountById(accountId);
 
     }
 
