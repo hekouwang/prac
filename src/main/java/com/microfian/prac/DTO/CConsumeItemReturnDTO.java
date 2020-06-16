@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class CConsumeItemDTO {
+public class CConsumeItemReturnDTO {
 
     private String id;
 
@@ -38,5 +38,15 @@ public class CConsumeItemDTO {
     private String relationId;
 
     private String accountBookId;
+
+    private String classifyName;
+
+    private String merchantName;
+
+    private String projectName;
+
+    private String sourceAccountName;
+
+    private String targetAccountName;
 
 }

@@ -114,6 +114,15 @@ public class CBussinessServiceImpl implements CBussinessService {
         cAccountItemPO.setType(1);
         cAccountItemPO.setAccountId(cConsumeItemDTO.getTargetAccount());
         cAccountItemPOMapper.insert(cAccountItemPO);
+
+        //5 增加一条转账记录
+        CConsumeItemPO cConsumeItemPO = new CConsumeItemPO();
+        BeanUtils.copyProperties(cConsumeItemDTO,cConsumeItemPO);
+        cConsumeItemPO.setId(LocalStringUtil.getUUID());
+        cConsumeItemPO.setConsumeType(3);
+        cConsumeItemPO.setIsAvailable(1);
+        cConsumeItemPO.setIsDeleted(0);
+        cConsumeItemPOMapper.insert(cConsumeItemPO);
         return null;
     }
 
