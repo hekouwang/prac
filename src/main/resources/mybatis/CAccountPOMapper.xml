@@ -27,7 +27,7 @@
     delete from c_account
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.po.CAccountPO">
+  <insert id="insert" parameterType="com.microfian.prac.entity.CAccountPO">
     insert into c_account (id, account_name, parent_account_id, 
       balance, account_type, create_time, 
       update_time, is_available, is_deleted, 

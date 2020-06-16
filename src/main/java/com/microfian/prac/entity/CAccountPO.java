@@ -1,7 +1,10 @@
 package com.microfian.prac.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
+@Component
 public class CAccountPO {
     private String id;
 

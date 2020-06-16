@@ -8,10 +8,15 @@ import com.microfian.prac.mapper.CAccountItemPOMapper;
 import com.microfian.prac.mapper.CAccountPOMapper;
 import com.microfian.prac.mapper.CConsumeItemPOMapper;
 import com.microfian.prac.service.CBussinessService;
+import com.microfian.prac.util.LocalStringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Slf4j
 @Service
@@ -28,24 +33,27 @@ public class CBussinessServiceImpl implements CBussinessService {
 
 
     @Override
-    public Object addOneExpand(CConsumeItemDTO cConsumeItemDTO) {
+    @Transactional
+    public Object addOneExpand(CConsumeItemDTO cConsumeItemDTO,CAccountPO cAccountPO) {
 
 
         //1 新增一条消费记录
         CConsumeItemPO cConsumeItemPO = new CConsumeItemPO();
         BeanUtils.copyProperties(cConsumeItemDTO,cConsumeItemPO);
+        cConsumeItemPO.setId(LocalStringUtil.getUUID());
+        cConsumeItemPO.setIsAvailable(1);
+        cConsumeItemPO.setIsDeleted(0);
         cConsumeItemPOMapper.insert(cConsumeItemPO);
 
         //2 账户变动
-        CAccountPO cAccountPO = cAccountPOMapper.selectByPrimaryKey(cConsumeItemDTO.getSourceAccount());
-        if(null == cAccountPO){
-
-        }
         if(cAccountPO.getAccountType()==1){
             cAccountPO.setBalance(cAccountPO.getBalance().subtract(cConsumeItemDTO.getMoney()));
         }else {
             cAccountPO.setBalance(cAccountPO.getBalance().add(cConsumeItemDTO.getMoney()));
         }
+        SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = format0.format(new Date());
+        cAccountPO.setUpdateTime(time);
         cAccountPOMapper.updateByPrimaryKey(cAccountPO);
 
         //3 新增一条账户变动记录
@@ -59,6 +67,16 @@ public class CBussinessServiceImpl implements CBussinessService {
         cAccountItemPO.setAccountId(cConsumeItemDTO.getSourceAccount());
         cAccountItemPOMapper.insert(cAccountItemPO);
 
+        return null;
+    }
+
+    @Override
+    public Object tranferAccount(CConsumeItemDTO cConsumeItemDTO,CAccountPO sourceAccount,CAccountPO targetAccount) {
+        return null;
+    }
+
+    @Override
+    public Object addOneIncome(CConsumeItemDTO cConsumeItemDTO,CAccountPO sourceAccount) {
         return null;
     }
 }

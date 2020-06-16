@@ -30,18 +30,19 @@ public class CBusinessController {
         if(StringUtils.isEmpty(cConsumeItemDTO.getSourceAccount())){
             return null;
         }
-        CAccountPO cAccountPO = cAccountService.selAccountById(cConsumeItemDTO.getSourceAccount());
-        if(null == cAccountPO){
+
+        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO);
+
+        if(null ==cAccountPO){
             return null;
         }
-        if(StringUtils.isNotEmpty(cConsumeItemDTO.getTargetAccount())){
-            CAccountPO cAccountPO1 = cAccountService.selAccountById(cConsumeItemDTO.getTargetAccount());
-            if(null == cAccountPO1){
-                return null;
-            }
-        }
+        return cBussinessService.addOneExpand(cConsumeItemDTO,cAccountPO);
 
-        return cBussinessService.addOneExpand(cConsumeItemDTO);
+    }
+
+    private CAccountPO checkAccount(CConsumeItemDTO cConsumeItemDTO){
+
+        return cAccountService.selAccountById(cConsumeItemDTO.getSourceAccount());
 
     }
 
