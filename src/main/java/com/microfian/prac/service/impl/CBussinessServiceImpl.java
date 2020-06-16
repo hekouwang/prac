@@ -7,11 +7,15 @@ import com.microfian.prac.entity.CConsumeItemPO;
 import com.microfian.prac.mapper.CAccountItemPOMapper;
 import com.microfian.prac.mapper.CAccountPOMapper;
 import com.microfian.prac.mapper.CConsumeItemPOMapper;
-import com.microfian.prac.service.BussinessService;
+import com.microfian.prac.service.CBussinessService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class BussinessServiceImpl implements BussinessService {
+@Slf4j
+@Service
+public class CBussinessServiceImpl implements CBussinessService {
 
     @Autowired
     private CAccountItemPOMapper cAccountItemPOMapper;
@@ -24,7 +28,7 @@ public class BussinessServiceImpl implements BussinessService {
 
 
     @Override
-    public void addOneExpand(CConsumeItemDTO cConsumeItemDTO) {
+    public Object addOneExpand(CConsumeItemDTO cConsumeItemDTO) {
 
 
         //1 新增一条消费记录
@@ -55,5 +59,6 @@ public class BussinessServiceImpl implements BussinessService {
         cAccountItemPO.setAccountId(cConsumeItemDTO.getSourceAccount());
         cAccountItemPOMapper.insert(cAccountItemPO);
 
+        return null;
     }
 }
