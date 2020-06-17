@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.lang3.StringUtils;
 
 @RestController
-@RequestMapping("bussiness")
+@RequestMapping("/bussiness")
 public class CBusinessController {
 
     @Autowired

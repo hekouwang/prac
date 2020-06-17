@@ -61,7 +61,7 @@ public class CBussinessServiceImpl implements CBussinessService {
         CAccountItemPO cAccountItemPO = new CAccountItemPO();
         cAccountItemPO.setIsAvailable(1);
         cAccountItemPO.setIsDeleted(0);
-        cAccountItemPO.setType(2);
+        cAccountItemPO.setType(1);
         cAccountItemPO.setCreateTime(cConsumeItemDTO.getCreateTime());
         cAccountItemPO.setMoney(cConsumeItemDTO.getMoney());
         cAccountItemPO.setMerchantId(cConsumeItemDTO.getMerchantId());
@@ -101,7 +101,7 @@ public class CBussinessServiceImpl implements CBussinessService {
         CAccountItemPO cAccountItemPO = new CAccountItemPO();
         cAccountItemPO.setIsAvailable(1);
         cAccountItemPO.setIsDeleted(0);
-        cAccountItemPO.setType(2);
+        cAccountItemPO.setType(1);
         cAccountItemPO.setCreateTime(cConsumeItemDTO.getCreateTime());
         cAccountItemPO.setMoney(cConsumeItemDTO.getMoney());
         cAccountItemPO.setMerchantId(cConsumeItemDTO.getMerchantId());
@@ -111,7 +111,7 @@ public class CBussinessServiceImpl implements CBussinessService {
 
 
         //4 目标账户增加一条记录
-        cAccountItemPO.setType(1);
+        cAccountItemPO.setType(2);
         cAccountItemPO.setAccountId(cConsumeItemDTO.getTargetAccount());
         cAccountItemPOMapper.insert(cAccountItemPO);
 
@@ -154,7 +154,7 @@ public class CBussinessServiceImpl implements CBussinessService {
         CAccountItemPO cAccountItemPO = new CAccountItemPO();
         cAccountItemPO.setIsAvailable(1);
         cAccountItemPO.setIsDeleted(0);
-        cAccountItemPO.setType(1);
+        cAccountItemPO.setType(2);
         cAccountItemPO.setCreateTime(cConsumeItemDTO.getCreateTime());
         cAccountItemPO.setMoney(cConsumeItemDTO.getMoney());
         cAccountItemPO.setMerchantId(cConsumeItemDTO.getMerchantId());

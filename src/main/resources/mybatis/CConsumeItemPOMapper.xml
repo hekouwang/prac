@@ -64,6 +64,8 @@
     where
         cci.is_deleted=0
         and  cci.is_available=1
+
+        order by cci.create_time desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
