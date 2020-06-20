@@ -42,11 +42,11 @@
   </delete>
 
   <insert id="insert" parameterType="com.microfian.prac.entity.CAccountPO">
-    insert into c_account (id, account_name, parent_account_id, 
+    insert into c_account (account_name, parent_account_id,
       balance, account_type, create_time, 
       update_time, is_available, is_deleted, 
       user_id)
-    values (#{id,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{parentAccountId,jdbcType=VARCHAR}, 
+    values (#{accountName,jdbcType=VARCHAR}, #{parentAccountId,jdbcType=VARCHAR},
       #{balance,jdbcType=DECIMAL}, #{accountType,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=VARCHAR}, #{isAvailable,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, 
       #{userId,jdbcType=VARCHAR})
@@ -55,9 +55,6 @@
   <insert id="insertSelective" parameterType="com.microfian.prac.entity.CAccountPO">
     insert into c_account
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="accountName != null">
         account_name,
       </if>
@@ -87,9 +84,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="accountName != null">
         #{accountName,jdbcType=VARCHAR},
       </if>

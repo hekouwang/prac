@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/bussiness")
 public class CBusinessController {
@@ -36,7 +39,10 @@ public class CBusinessController {
         if(null ==cAccountPO){
             return null;
         }
-        return cBussinessService.addOneExpand(cConsumeItemDTO,cAccountPO);
+        Map map = new HashMap<>();
+        map.put("code",20000);
+        map.put("data", cBussinessService.addOneExpand(cConsumeItemDTO,cAccountPO));
+        return map;
 
     }
 
@@ -56,7 +62,10 @@ public class CBusinessController {
         if(null ==cAccountPO){
             return null;
         }
-        return cBussinessService.tranferAccount(cConsumeItemDTO,cAccountPO,cAccountPO1);
+        Map map = new HashMap<>();
+        map.put("code",20000);
+        map.put("data", cBussinessService.tranferAccount(cConsumeItemDTO,cAccountPO,cAccountPO1));
+        return map;
 
     }
 
@@ -75,7 +84,10 @@ public class CBusinessController {
         if(null ==cAccountPO){
             return null;
         }
-        return cBussinessService.addOneIncome(cConsumeItemDTO,cAccountPO);
+        Map map = new HashMap<>();
+        map.put("code",20000);
+        map.put("data", cBussinessService.addOneIncome(cConsumeItemDTO,cAccountPO));
+        return map;
 
     }
 

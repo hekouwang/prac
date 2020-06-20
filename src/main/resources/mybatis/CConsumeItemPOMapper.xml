@@ -76,13 +76,13 @@
   </delete>
 
   <insert id="insert" parameterType="com.microfian.prac.entity.CConsumeItemPO">
-    insert into c_consume_item (id, money, consume_type, 
+    insert into c_consume_item (money, consume_type,
       classify_id, source_account, target_account, 
       merchant_id, project_id, remark, 
       create_time, update_time, is_available, 
       is_deleted, user_id, relation_id, 
       account_book_id)
-    values (#{id,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, #{consumeType,jdbcType=INTEGER}, 
+    values (#{money,jdbcType=DECIMAL}, #{consumeType,jdbcType=INTEGER},
       #{classifyId,jdbcType=VARCHAR}, #{sourceAccount,jdbcType=VARCHAR}, #{targetAccount,jdbcType=VARCHAR}, 
       #{merchantId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{isAvailable,jdbcType=INTEGER}, 
@@ -93,9 +93,6 @@
   <insert id="insertSelective" parameterType="com.microfian.prac.entity.CConsumeItemPO">
     insert into c_consume_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="money != null">
         money,
       </if>
@@ -143,9 +140,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="money != null">
         #{money,jdbcType=DECIMAL},
       </if>

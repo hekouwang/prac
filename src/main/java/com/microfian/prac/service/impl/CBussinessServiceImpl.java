@@ -40,7 +40,6 @@ public class CBussinessServiceImpl implements CBussinessService {
         //1 新增一条消费记录
         CConsumeItemPO cConsumeItemPO = new CConsumeItemPO();
         BeanUtils.copyProperties(cConsumeItemDTO,cConsumeItemPO);
-        cConsumeItemPO.setId(LocalStringUtil.getUUID());
         cConsumeItemPO.setIsAvailable(1);
         cConsumeItemPO.setIsDeleted(0);
         cConsumeItemPOMapper.insert(cConsumeItemPO);

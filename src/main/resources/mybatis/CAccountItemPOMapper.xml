@@ -31,12 +31,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.microfian.prac.entity.CAccountItemPO">
-    insert into c_account_item (id, money, type, 
+    insert into c_account_item (money, type,
       account_id, remark, target_account_id, 
       merchant_id, classify_id, project_id, 
       create_time, update_time, is_available, 
       is_deleted)
-    values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, 
+    values (#{money,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER},
       #{accountId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{targetAccountId,jdbcType=VARCHAR}, 
       #{merchantId,jdbcType=VARCHAR}, #{classifyId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{isAvailable,jdbcType=INTEGER}, 
@@ -45,9 +45,6 @@
   <insert id="insertSelective" parameterType="com.microfian.prac.entity.CAccountItemPO">
     insert into c_account_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="money != null">
         money,
       </if>
@@ -86,9 +83,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="money != null">
         #{money,jdbcType=DECIMAL},
       </if>

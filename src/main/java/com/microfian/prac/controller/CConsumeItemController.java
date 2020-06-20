@@ -5,6 +5,7 @@ import com.microfian.prac.DTO.CConsumeItemReturnDTO;
 import com.microfian.prac.DTO.ResCConsumeItem;
 import com.microfian.prac.service.CConsumeItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,11 @@ public class CConsumeItemController {
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
         map1.put("items", list);
-        map1.put("total", 12);
+        map1.put("total", 0);
+        if(!CollectionUtils.isEmpty(list)){
+            map1.put("total", list.size());
+            map1.put("totalCount",list.get(0).getTotalCount());
+        }
         map.put("data", map1);
         map.put("code", 20000);
         return map;

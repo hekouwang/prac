@@ -14,6 +14,8 @@ public class ResCConsumeItem {
 
     private BigDecimal out;
 
+    private TotalCount totalCount;
+
 
 
     private List<CConsumeItemReturnDTO> cConsumeItemReturnDTOList;
