@@ -1,5 +1,6 @@
 package com.microfian.prac.service.impl;
 
+import com.microfian.prac.DTO.CAccountDTO;
 import com.microfian.prac.entity.CAccountPO;
 import com.microfian.prac.mapper.CAccountPOMapper;
 import com.microfian.prac.service.CAccountService;
@@ -35,6 +36,11 @@ public class CAccountServiceImpl implements CAccountService {
     @Override
     public CAccountPO selAccountById(String id) {
         return cAccountPOMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<CAccountPO> selAccount(CAccountDTO cAccountDTO) {
+        return cAccountPOMapper.selCAcount(cAccountDTO);
     }
 
     @Override

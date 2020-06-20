@@ -26,6 +26,7 @@
     <result column="consume_type" jdbcType="INTEGER" property="consumeType" />
     <result column="classify_name" jdbcType="VARCHAR" property="classifyName" />
     <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="source_account_name" jdbcType="VARCHAR" property="sourceAccountName" />
     <result column="target_account_name" jdbcType="VARCHAR" property="targetAccountName" />
@@ -49,6 +50,7 @@
         cci.money,
         cci.consume_type,
         cci.remark,
+        cci.create_time,
         cc.classify_name,
         cm.merchant_name,
         cp.project_name,
@@ -218,7 +220,7 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null">xxxxxxxx``
         create_time = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
