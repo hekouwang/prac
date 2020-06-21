@@ -24,13 +24,12 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
 
     @Override
     public List<ResCConsumeItem> listCConsumeItem(CConsumeItemDTO cConsumeItemDTO) {
+
         List<CConsumeItemReturnDTO> list = cConsumeItemPOMapper.selByCondition(cConsumeItemDTO);
         List<ResCConsumeItem> resCConsumeItemList = new ArrayList<>();
-
         if (CollectionUtils.isEmpty(list)) {
             return resCConsumeItemList;
         }
-
         //当前时间段的总支出，总收入
         TotalCount totalCount = new TotalCount();
         BigDecimal totalIncome = new BigDecimal("0");
@@ -38,7 +37,6 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
         BigDecimal toalRemain = new BigDecimal("0");
         String startTime = "";
         String endTime = "";
-
         for (CConsumeItemReturnDTO cConsumeItemReturnDTO : list) {
             if (1 == cConsumeItemReturnDTO.getConsumeType()) {
                 totalExpense = totalExpense.add(cConsumeItemReturnDTO.getMoney());
@@ -72,7 +70,8 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
                 }
             }
             //按提交时间降序--stream写法
-            entryList = entryList.stream().sorted(Comparator.comparing(CConsumeItemReturnDTO::getCreateTime).reversed()).collect(Collectors.toList());//根据创建时间倒排
+            entryList = entryList.stream().sorted(Comparator.comparing(CConsumeItemReturnDTO::getCreateTime).
+                    reversed()).collect(Collectors.toList());//根据创建时间倒排
 
             resCConsumeItem.setIn(in);
             resCConsumeItem.setOut(out);

@@ -46,6 +46,7 @@
   </select>
 
   <select id="selByCondition" parameterType="com.microfian.prac.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
+
     select
         cci.money,
         cci.consume_type,
@@ -66,8 +67,50 @@
     where
         cci.is_deleted=0
         and  cci.is_available=1
+        <if test="accountList!=null">
+          AND (cci.source_account in
+          <foreach collection="accountList" item="item"
+                   index="index" open="(" close=")" separator=",">
+            #{item}
+          </foreach>
+        </if>
+        <if test="accountList!=null">
+          or cci.target_account in
+          <foreach collection="accountList" item="item"
+                   index="index" open="(" close=")" separator=",">
+            #{item}
+          </foreach>
+          )
+        </if>
+        <if test="classifyList !=null">
+          AND cci.classify_id in
+          <foreach collection="classifyList" item="item"
+                   index="index" open="(" close=")" separator=",">
+            #{item}
+          </foreach>
+        </if>
+        <if test="merchantList!=null ">
+          AND cci.merchant_id in
+          <foreach collection="merchantList" item="item"
+                   index="index" open="(" close=")" separator=",">
+            #{item}
+          </foreach>
+        </if>
+        <if test="projectList!=null ">
+          AND cci.project_id in
+          <foreach collection="projectList" item="item"
+                   index="index" open="(" close=")" separator=",">
+            #{item}
+          </foreach>
+        </if>
+        <if test="startTime !=null and startTime !=''">
+          AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s' )
+        </if>
+        <if test="endTime !=null and endTime !=''">
+          AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
+        </if>
 
-        order by cci.create_time desc
+            order by cci.create_time desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

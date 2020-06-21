@@ -24,6 +24,7 @@ public class CConsumeItemController {
 
     @PostMapping(value = "/listCousumeItem")
     public Object addAccount(@RequestBody CConsumeItemDTO cConsumeItemDTO) {
+
         List<ResCConsumeItem> list = cConsumeItemService.listCConsumeItem(cConsumeItemDTO);
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
@@ -36,5 +37,6 @@ public class CConsumeItemController {
         map.put("data", map1);
         map.put("code", 20000);
         return map;
+
     }
 }

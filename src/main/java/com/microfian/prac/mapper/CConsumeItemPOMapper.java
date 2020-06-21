@@ -3,6 +3,7 @@ package com.microfian.prac.mapper;
 import com.microfian.prac.DTO.CConsumeItemDTO;
 import com.microfian.prac.DTO.CConsumeItemReturnDTO;
 import com.microfian.prac.entity.CConsumeItemPO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

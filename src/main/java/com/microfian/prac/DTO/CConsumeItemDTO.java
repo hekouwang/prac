@@ -3,6 +3,7 @@ package com.microfian.prac.DTO;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class CConsumeItemDTO {
@@ -38,5 +39,24 @@ public class CConsumeItemDTO {
     private String relationId;
 
     private String accountBookId;
+
+    private List<Integer> classifyList;
+
+    private List<Integer> accountList;
+
+    private List<Integer> merchantList;
+
+    private List<Integer> projectList;
+
+    private List<Integer> relationList;
+
+    private List<String> timeList;
+
+    private String startTime;
+
+    private String endTime;
+
+
+
 
 }
