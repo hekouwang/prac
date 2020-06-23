@@ -30,4 +30,14 @@ public class CClassifyController {
         map.put("data", cClassifyService.selClassify(cClassifyDTO));
         return map;
     }
+
+    @PostMapping(value = "/listClassifyByGroup")
+    public Object listClassifyByGroup(@RequestBody CClassifyDTO cClassifyDTO) {
+        Map map = new HashMap<>();
+        map.put("code",20000);
+        map.put("data", cClassifyService.selClassify(cClassifyDTO));
+        return map;
+    }
+
+
 }

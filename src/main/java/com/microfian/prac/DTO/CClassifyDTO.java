@@ -8,11 +8,12 @@ import java.util.Date;
 @Component
 @Data
 public class CClassifyDTO {
+
     private Integer id;
 
     private String classifyName;
 
-    private String parentId;
+    private Integer parentId;
 
     private String createTime;
 
