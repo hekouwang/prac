@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 @RestController
 @RequestMapping("merchant")
 public class CMerchantController {
@@ -18,5 +21,15 @@ public class CMerchantController {
     @PostMapping(value = "/addMerchant")
     public Object addMerant(@RequestBody CMerchantPO cMerchantPO){
         return cMerchantService.addMerchant(cMerchantPO);
+    }
+
+    @PostMapping(value = "/listMerchant")
+    public Object listMerchant(@RequestBody CMerchantPO cMerchantPO){
+        return cMerchantService.selectMerchant(cMerchantPO);
+    }
+
+    public static void main(String[] args) {
+
+
     }
 }

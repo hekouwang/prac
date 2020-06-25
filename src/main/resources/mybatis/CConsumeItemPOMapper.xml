@@ -23,6 +23,7 @@
 
   <resultMap id="BaseResultMap1" type="com.microfian.prac.DTO.CConsumeItemReturnDTO">
     <id column="money" jdbcType="DECIMAL" property="money" />
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="consume_type" jdbcType="INTEGER" property="consumeType" />
     <result column="classify_name" jdbcType="VARCHAR" property="classifyName" />
     <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
@@ -48,6 +49,7 @@
   <select id="selByCondition" parameterType="com.microfian.prac.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
 
     select
+        cci.id,
         cci.money,
         cci.consume_type,
         cci.remark,
@@ -82,9 +84,9 @@
           </foreach>
           )
         </if>
-        <if test="classifyList !=null">
+        <if test="realClassifyList !=null">
           AND cci.classify_id in
-          <foreach collection="classifyList" item="item"
+          <foreach collection="realClassifyList" item="item"
                    index="index" open="(" close=")" separator=",">
             #{item}
           </foreach>

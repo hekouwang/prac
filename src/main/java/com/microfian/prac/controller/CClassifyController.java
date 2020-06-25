@@ -35,7 +35,7 @@ public class CClassifyController {
     public Object listClassifyByGroup(@RequestBody CClassifyDTO cClassifyDTO) {
         Map map = new HashMap<>();
         map.put("code",20000);
-        map.put("data", cClassifyService.selClassify(cClassifyDTO));
+        map.put("data", cClassifyService.selClassifyByGroup(cClassifyDTO));
         return map;
     }
 

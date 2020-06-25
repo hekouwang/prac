@@ -40,7 +40,9 @@ public class CConsumeItemDTO {
 
     private String accountBookId;
 
-    private List<Integer> classifyList;
+    private List<List<Integer>> classifyList;
+
+    private List<Integer> realClassifyList;
 
     private List<Integer> accountList;
 
@@ -51,6 +53,8 @@ public class CConsumeItemDTO {
     private List<Integer> relationList;
 
     private List<String> timeList;
+
+    private List<String> startAndEndTime;
 
     private String startTime;
 

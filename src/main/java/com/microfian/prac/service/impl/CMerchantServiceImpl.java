@@ -42,7 +42,9 @@ public class CMerchantServiceImpl implements CMerchantService {
 
     @Override
     public List<CMerchantPO> selectMerchant(CMerchantPO cMerchantPO) {
-        return null;
+
+        return cMerchantPOMapper.selectMerchant(cMerchantPO);
+
     }
 
 

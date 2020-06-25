@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,11 +26,45 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
     @Override
     public List<ResCConsumeItem> listCConsumeItem(CConsumeItemDTO cConsumeItemDTO) {
 
+        //判断是否传了类别
+        if(!CollectionUtils.isEmpty(cConsumeItemDTO.getClassifyList())){
+            List<Integer> list=new ArrayList<>();
+            for(List<Integer> list1:cConsumeItemDTO.getClassifyList()){
+                list.addAll(list1);
+            }
+            cConsumeItemDTO.setRealClassifyList(list);
+        }
+
+        //判断是否传了时间,没有的话取当前日期所在月份第一天和最后一天
+        if(!CollectionUtils.isEmpty(cConsumeItemDTO.getStartAndEndTime())){
+            String startTime=cConsumeItemDTO.getStartAndEndTime().get(0)+" 00:00:00";
+            String endTime=cConsumeItemDTO.getStartAndEndTime().get(1)+" 23:59:59";
+            cConsumeItemDTO.setStartTime(startTime);
+            cConsumeItemDTO.setEndTime(endTime);
+        }else{
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            //获取当前月第一天：
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.MONTH, 0);
+            c.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
+            String monthfirst = format.format(c.getTime());
+
+            //获取当前月最后一天
+            Calendar ca = Calendar.getInstance();
+            ca.set(Calendar.DAY_OF_MONTH, ca.getActualMaximum(Calendar.DAY_OF_MONTH));
+            String monthlast = format.format(ca.getTime());
+            String startTime=monthfirst+" 00:00:00";
+            String endTime=monthlast+" 23:59:59";
+            cConsumeItemDTO.setStartTime(startTime);
+            cConsumeItemDTO.setEndTime(endTime);
+        }
         List<CConsumeItemReturnDTO> list = cConsumeItemPOMapper.selByCondition(cConsumeItemDTO);
         List<ResCConsumeItem> resCConsumeItemList = new ArrayList<>();
         if (CollectionUtils.isEmpty(list)) {
             return resCConsumeItemList;
         }
+
         //当前时间段的总支出，总收入
         TotalCount totalCount = new TotalCount();
         BigDecimal totalIncome = new BigDecimal("0");

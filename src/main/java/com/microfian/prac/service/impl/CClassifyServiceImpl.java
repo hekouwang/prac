@@ -32,7 +32,7 @@ public class CClassifyServiceImpl  implements CClassifyService {
         List<ClassifyVo> list=new ArrayList<>();
         cClassifyDTO.setParentId(0);
         List<CClassifyPO> cClassifyPOS = cClassifyPOMapper.selCClassify(cClassifyDTO);
-        if(!CollectionUtils.isEmpty(cClassifyPOS)) {
+        if(CollectionUtils.isEmpty(cClassifyPOS)) {
             return list;
         }
 

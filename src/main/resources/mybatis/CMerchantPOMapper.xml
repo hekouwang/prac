@@ -10,19 +10,33 @@
     <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, merchant_name, create_time, update_time, is_available, is_deleted, user_id
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from c_merchant
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectMerchant" parameterType="com.microfian.prac.entity.CMerchantPO" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from
+        c_merchant
+    where
+        is_available=1
+        and is_deleted=0
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from c_merchant
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.microfian.prac.entity.CMerchantPO">
     insert into c_merchant (merchant_name, create_time,
       update_time, is_available, is_deleted, 
@@ -31,6 +45,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{isAvailable,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, 
       #{userId,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" parameterType="com.microfian.prac.entity.CMerchantPO">
     insert into c_merchant
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -74,6 +89,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.CMerchantPO">
     update c_merchant
     <set>
@@ -98,6 +114,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.CMerchantPO">
     update c_merchant
     set merchant_name = #{merchantName,jdbcType=VARCHAR},
@@ -108,4 +125,5 @@
       user_id = #{userId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>
