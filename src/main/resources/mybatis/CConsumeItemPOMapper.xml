@@ -31,6 +31,7 @@
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="source_account_name" jdbcType="VARCHAR" property="sourceAccountName" />
     <result column="target_account_name" jdbcType="VARCHAR" property="targetAccountName" />
+    <result column="relationName" jdbcType="VARCHAR" property="relationName" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -58,7 +59,8 @@
         cm.merchant_name,
         cp.project_name,
         ca.account_name source_account_name,
-        caa.account_name target_account_name
+        caa.account_name target_account_name,
+        cr.name relationName
     from
         c_consume_item cci
         left join c_classify cc on cci.classify_id =cc.id
@@ -66,6 +68,7 @@
         left join c_project cp on cci.project_id=cp.id
         left join c_account ca on cci.source_account=ca.id
         left join c_account caa on cci.target_account=caa.id
+        left join c_relation cr on cci. relation_id =cr.id
     where
         cci.is_deleted=0
         and  cci.is_available=1

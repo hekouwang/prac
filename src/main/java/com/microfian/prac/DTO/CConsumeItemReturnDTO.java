@@ -49,6 +49,8 @@ public class CConsumeItemReturnDTO {
 
     private String targetAccountName;
 
+    private String relationName;
+
     public String  getDay(){
         return this.createTime.substring(0,10);
     }
