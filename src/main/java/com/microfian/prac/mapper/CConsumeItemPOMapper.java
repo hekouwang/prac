@@ -20,6 +20,8 @@ public interface CConsumeItemPOMapper {
 
     List<CConsumeItemReturnDTO> selByCondition(CConsumeItemDTO cConsumeItemDTO);
 
+    List<CConsumeItemPO> selByParentId(int id);
+
     int updateByPrimaryKeySelective(CConsumeItemPO record);
 
     int updateByPrimaryKey(CConsumeItemPO record);

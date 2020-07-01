@@ -118,6 +118,19 @@
             order by cci.create_time desc
   </select>
 
+  <select id="selByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     SELECT
+        cci.*
+     FROM
+        c_consume_item cci
+        LEFT JOIN c_classify cc ON cci.classify_id = cc.id
+     WHERE
+        cc.parent_id = #{id}
+        and cci.consume_type=1
+         AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( '2020-06-01 00:00:00', '%Y-%m-%d %H:%i:%s' )
+      AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( '2020-06-30 23:59:59', '%Y-%m-%d %H:%i:%s' )
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from c_consume_item
     where id = #{id,jdbcType=VARCHAR}

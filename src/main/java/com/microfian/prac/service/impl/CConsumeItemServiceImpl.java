@@ -1,9 +1,9 @@
 package com.microfian.prac.service.impl;
 
-import com.microfian.prac.DTO.CConsumeItemDTO;
-import com.microfian.prac.DTO.CConsumeItemReturnDTO;
-import com.microfian.prac.DTO.ResCConsumeItem;
-import com.microfian.prac.DTO.TotalCount;
+import com.microfian.prac.DTO.*;
+import com.microfian.prac.entity.CClassifyPO;
+import com.microfian.prac.entity.CConsumeItemPO;
+import com.microfian.prac.mapper.CClassifyPOMapper;
 import com.microfian.prac.mapper.CConsumeItemPOMapper;
 import com.microfian.prac.service.CConsumeItemService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +22,9 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
 
     @Autowired
     private CConsumeItemPOMapper cConsumeItemPOMapper;
+
+    @Autowired
+    private CClassifyPOMapper cClassifyPOMapper;
 
     @Override
     public List<ResCConsumeItem> listCConsumeItem(CConsumeItemDTO cConsumeItemDTO) {
@@ -114,5 +117,31 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
             resCConsumeItemList.add(resCConsumeItem);
         }
         return resCConsumeItemList;
+    }
+
+    @Override
+    public List<ClassifyAndConsumeReturnDTO> listConsumeItemGroupAndOrder(CConsumeItemDTO cConsumeItemDTO) {
+
+        List<ClassifyAndConsumeReturnDTO> list=new ArrayList<>();
+        CClassifyDTO cClassifyDTO=new CClassifyDTO();
+        cClassifyDTO.setParentId(0);
+        List<CClassifyPO> cClassifyPOS = cClassifyPOMapper.selCClassify(cClassifyDTO);
+        if(CollectionUtils.isEmpty(cClassifyPOS)){
+            return null;
+        }
+        for(CClassifyPO cClassifyPO:cClassifyPOS){
+            ClassifyAndConsumeReturnDTO classifyAndConsumeReturnDTO=new ClassifyAndConsumeReturnDTO();
+            classifyAndConsumeReturnDTO.setClassifyName(cClassifyPO.getClassifyName());
+            List<CConsumeItemPO> cConsumeItemReturnDTOS = cConsumeItemPOMapper.selByParentId(cClassifyPO.getId());
+            BigDecimal out = new BigDecimal("0");
+            for(CConsumeItemPO item:cConsumeItemReturnDTOS){
+                out = out.add(item.getMoney());
+            }
+            classifyAndConsumeReturnDTO.setMoney(out);
+            list.add(classifyAndConsumeReturnDTO);
+        }
+        list = list.stream().sorted(Comparator.comparing(ClassifyAndConsumeReturnDTO::getMoney).
+                reversed()).collect(Collectors.toList());
+        return list;
     }
 }
