@@ -44,7 +44,8 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
             String endTime=cConsumeItemDTO.getStartAndEndTime().get(1)+" 23:59:59";
             cConsumeItemDTO.setStartTime(startTime);
             cConsumeItemDTO.setEndTime(endTime);
-        }else{
+        }
+        else{
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
             //获取当前月第一天：
