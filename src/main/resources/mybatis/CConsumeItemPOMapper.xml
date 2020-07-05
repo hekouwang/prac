@@ -2,54 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.microfian.prac.mapper.CConsumeItemPOMapper">
 
-  <resultMap id="BaseResultMap" type="com.microfian.prac.entity.CConsumeItemPO">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="money" jdbcType="DECIMAL" property="money" />
-    <result column="consume_type" jdbcType="INTEGER" property="consumeType" />
-    <result column="classify_id" jdbcType="VARCHAR" property="classifyId" />
-    <result column="source_account" jdbcType="VARCHAR" property="sourceAccount" />
-    <result column="target_account" jdbcType="VARCHAR" property="targetAccount" />
-    <result column="merchant_id" jdbcType="VARCHAR" property="merchantId" />
-    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
-    <result column="is_available" jdbcType="INTEGER" property="isAvailable" />
-    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="relation_id" jdbcType="VARCHAR" property="relationId" />
-    <result column="account_book_id" jdbcType="VARCHAR" property="accountBookId" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.microfian.prac.entity.CConsumeItemPO">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="consume_type" jdbcType="INTEGER" property="consumeType"/>
+        <result column="classify_id" jdbcType="VARCHAR" property="classifyId"/>
+        <result column="source_account" jdbcType="VARCHAR" property="sourceAccount"/>
+        <result column="target_account" jdbcType="VARCHAR" property="targetAccount"/>
+        <result column="merchant_id" jdbcType="VARCHAR" property="merchantId"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="is_available" jdbcType="INTEGER" property="isAvailable"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="relation_id" jdbcType="VARCHAR" property="relationId"/>
+        <result column="account_book_id" jdbcType="VARCHAR" property="accountBookId"/>
+    </resultMap>
 
-  <resultMap id="BaseResultMap1" type="com.microfian.prac.DTO.CConsumeItemReturnDTO">
-    <id column="money" jdbcType="DECIMAL" property="money" />
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="consume_type" jdbcType="INTEGER" property="consumeType" />
-    <result column="classify_name" jdbcType="VARCHAR" property="classifyName" />
-    <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
-    <result column="source_account_name" jdbcType="VARCHAR" property="sourceAccountName" />
-    <result column="target_account_name" jdbcType="VARCHAR" property="targetAccountName" />
-    <result column="relationName" jdbcType="VARCHAR" property="relationName" />
-  </resultMap>
+    <resultMap id="BaseResultMap1" type="com.microfian.prac.DTO.CConsumeItemReturnDTO">
+        <id column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="consume_type" jdbcType="INTEGER" property="consumeType"/>
+        <result column="classify_name" jdbcType="VARCHAR" property="classifyName"/>
+        <result column="merchant_name" jdbcType="VARCHAR" property="merchantName"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="source_account_name" jdbcType="VARCHAR" property="sourceAccountName"/>
+        <result column="target_account_name" jdbcType="VARCHAR" property="targetAccountName"/>
+        <result column="relationName" jdbcType="VARCHAR" property="relationName"/>
+    </resultMap>
 
-  <sql id="Base_Column_List">
+    <sql id="Base_Column_List">
     id, money, consume_type, classify_id, source_account, target_account, merchant_id, 
     project_id, remark, create_time, update_time, is_available, is_deleted, user_id, 
     relation_id, account_book_id
   </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from c_consume_item
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from c_consume_item
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
 
-  <select id="selByCondition" parameterType="com.microfian.prac.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
+    <select id="selByCondition" parameterType="com.microfian.prac.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
 
-    select
+        select
         cci.id,
         cci.money,
         cci.consume_type,
@@ -61,7 +61,7 @@
         ca.account_name source_account_name,
         caa.account_name target_account_name,
         cr.name relationName
-    from
+        from
         c_consume_item cci
         left join c_classify cc on cci.classify_id =cc.id
         left join c_merchant cm on cci.merchant_id =cm.id
@@ -69,56 +69,57 @@
         left join c_account ca on cci.source_account=ca.id
         left join c_account caa on cci.target_account=caa.id
         left join c_relation cr on cci. relation_id =cr.id
-    where
+        where
         cci.is_deleted=0
-        and  cci.is_available=1
-        <if test="accountList!=null">
-          AND (cci.source_account in
-          <foreach collection="accountList" item="item"
-                   index="index" open="(" close=")" separator=",">
-            #{item}
-          </foreach>
+        and cci.is_available=1
+        <if test="accountList!=null and accountList.size() > 0">
+            AND (cci.source_account in
+            <foreach collection="accountList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
         </if>
-        <if test="accountList!=null">
-          or cci.target_account in
-          <foreach collection="accountList" item="item"
-                   index="index" open="(" close=")" separator=",">
-            #{item}
-          </foreach>
-          )
+        <if test="accountList!=null and accountList.size() > 0 ">
+            or cci.target_account in
+            <foreach collection="accountList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+            )
         </if>
         <if test="realClassifyList !=null">
-          AND cci.classify_id in
-          <foreach collection="realClassifyList" item="item"
-                   index="index" open="(" close=")" separator=",">
-            #{item}
-          </foreach>
+            AND cci.classify_id in
+            <foreach collection="realClassifyList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
         </if>
-        <if test="merchantList!=null ">
-          AND cci.merchant_id in
-          <foreach collection="merchantList" item="item"
-                   index="index" open="(" close=")" separator=",">
-            #{item}
-          </foreach>
+        <if test="merchantList!=null  and merchantList.size() > 0">
+            AND cci.merchant_id in
+            <foreach collection="merchantList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
         </if>
-        <if test="projectList!=null ">
-          AND cci.project_id in
-          <foreach collection="projectList" item="item"
-                   index="index" open="(" close=")" separator=",">
-            #{item}
-          </foreach>
+        <if test="projectList!=null and projectList.size() >0">
+            AND cci.project_id in
+            <foreach collection="projectList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
         </if>
         <if test="startTime !=null and startTime !=''">
-          AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s' )
+            AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s'
+            )
         </if>
         <if test="endTime !=null and endTime !=''">
-          AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
+            AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
         </if>
 
-            order by cci.create_time desc
-  </select>
+        order by cci.create_time desc
+    </select>
 
-  <select id="selByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
      SELECT
         cci.*
      FROM
@@ -131,12 +132,12 @@
       AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( '2020-06-30 23:59:59', '%Y-%m-%d %H:%i:%s' )
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from c_consume_item
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+    <insert id="insert" parameterType="com.microfian.prac.entity.CConsumeItemPO">
     insert into c_consume_item (money, consume_type,
       classify_id, source_account, target_account, 
       merchant_id, project_id, remark, 
@@ -151,155 +152,155 @@
       #{accountBookId,jdbcType=VARCHAR})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.microfian.prac.entity.CConsumeItemPO">
-    insert into c_consume_item
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="money != null">
-        money,
-      </if>
-      <if test="consumeType != null">
-        consume_type,
-      </if>
-      <if test="classifyId != null">
-        classify_id,
-      </if>
-      <if test="sourceAccount != null">
-        source_account,
-      </if>
-      <if test="targetAccount != null">
-        target_account,
-      </if>
-      <if test="merchantId != null">
-        merchant_id,
-      </if>
-      <if test="projectId != null">
-        project_id,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="isAvailable != null">
-        is_available,
-      </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="relationId != null">
-        relation_id,
-      </if>
-      <if test="accountBookId != null">
-        account_book_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="money != null">
-        #{money,jdbcType=DECIMAL},
-      </if>
-      <if test="consumeType != null">
-        #{consumeType,jdbcType=INTEGER},
-      </if>
-      <if test="classifyId != null">
-        #{classifyId,jdbcType=VARCHAR},
-      </if>
-      <if test="sourceAccount != null">
-        #{sourceAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="targetAccount != null">
-        #{targetAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="merchantId != null">
-        #{merchantId,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null">
-        #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=VARCHAR},
-      </if>
-      <if test="isAvailable != null">
-        #{isAvailable,jdbcType=INTEGER},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="relationId != null">
-        #{relationId,jdbcType=VARCHAR},
-      </if>
-      <if test="accountBookId != null">
-        #{accountBookId,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.CConsumeItemPO">
-    update c_consume_item
-    <set>
-      <if test="money != null">
-        money = #{money,jdbcType=DECIMAL},
-      </if>
-      <if test="consumeType != null">
-        consume_type = #{consumeType,jdbcType=INTEGER},
-      </if>
-      <if test="classifyId != null">
-        classify_id = #{classifyId,jdbcType=VARCHAR},
-      </if>
-      <if test="sourceAccount != null">
-        source_account = #{sourceAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="targetAccount != null">
-        target_account = #{targetAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="merchantId != null">
-        merchant_id = #{merchantId,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null">
-        project_id = #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">xxxxxxxx``
-        create_time = #{createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=VARCHAR},
-      </if>
-      <if test="isAvailable != null">
-        is_available = #{isAvailable,jdbcType=INTEGER},
-      </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="relationId != null">
-        relation_id = #{relationId,jdbcType=VARCHAR},
-      </if>
-      <if test="accountBookId != null">
-        account_book_id = #{accountBookId,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+    <insert id="insertSelective" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+        insert into c_consume_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="money != null">
+                money,
+            </if>
+            <if test="consumeType != null">
+                consume_type,
+            </if>
+            <if test="classifyId != null">
+                classify_id,
+            </if>
+            <if test="sourceAccount != null">
+                source_account,
+            </if>
+            <if test="targetAccount != null">
+                target_account,
+            </if>
+            <if test="merchantId != null">
+                merchant_id,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isAvailable != null">
+                is_available,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="relationId != null">
+                relation_id,
+            </if>
+            <if test="accountBookId != null">
+                account_book_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="money != null">
+                #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="consumeType != null">
+                #{consumeType,jdbcType=INTEGER},
+            </if>
+            <if test="classifyId != null">
+                #{classifyId,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceAccount != null">
+                #{sourceAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="targetAccount != null">
+                #{targetAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantId != null">
+                #{merchantId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isAvailable != null">
+                #{isAvailable,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="accountBookId != null">
+                #{accountBookId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+        update c_consume_item
+        <set>
+            <if test="money != null">
+                money = #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="consumeType != null">
+                consume_type = #{consumeType,jdbcType=INTEGER},
+            </if>
+            <if test="classifyId != null">
+                classify_id = #{classifyId,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceAccount != null">
+                source_account = #{sourceAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="targetAccount != null">
+                target_account = #{targetAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">xxxxxxxx``
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isAvailable != null">
+                is_available = #{isAvailable,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationId != null">
+                relation_id = #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="accountBookId != null">
+                account_book_id = #{accountBookId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.CConsumeItemPO">
     update c_consume_item
     set money = #{money,jdbcType=DECIMAL},
       consume_type = #{consumeType,jdbcType=INTEGER},
