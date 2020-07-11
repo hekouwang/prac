@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("cousumeItem")
+@RequestMapping("/cousumeItem")
 public class CConsumeItemController {
 
     @Autowired
@@ -48,10 +50,16 @@ public class CConsumeItemController {
                 cConsumeItemService.listConsumeItemGroupAndOrder(cConsumeItemDTO);
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
-        map1.put("items", classifyAndConsumeReturnDTOS);
-        map1.put("total", 0);
+        List<String> classifyList=new ArrayList<>();
+        List<BigDecimal> moneyList=new ArrayList<>();
         if(!CollectionUtils.isEmpty(classifyAndConsumeReturnDTOS)){
             map1.put("total", classifyAndConsumeReturnDTOS.size());
+            for(ClassifyAndConsumeReturnDTO classifyAndConsumeReturnDTO:classifyAndConsumeReturnDTOS){
+                classifyList.add(classifyAndConsumeReturnDTO.getClassifyName());
+                moneyList.add(classifyAndConsumeReturnDTO.getMoney());
+            }
+            map1.put("classifyList",classifyList);
+            map1.put("moneyList",moneyList);
         }
         map.put("data", map1);
         map.put("code", 20000);

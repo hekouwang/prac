@@ -127,6 +127,13 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
         CClassifyDTO cClassifyDTO=new CClassifyDTO();
         cClassifyDTO.setParentId(0);
         List<CClassifyPO> cClassifyPOS = cClassifyPOMapper.selCClassify(cClassifyDTO);
+        //判断是否传了时间,没有的话取当前日期所在月份第一天和最后一天
+        if(!CollectionUtils.isEmpty(cConsumeItemDTO.getStartAndEndTime())){
+            String startTime=cConsumeItemDTO.getStartAndEndTime().get(0)+" 00:00:00";
+            String endTime=cConsumeItemDTO.getStartAndEndTime().get(1)+" 23:59:59";
+            cConsumeItemDTO.setStartTime(startTime);
+            cConsumeItemDTO.setEndTime(endTime);
+        }
         if(CollectionUtils.isEmpty(cClassifyPOS)){
             return null;
         }
@@ -141,8 +148,9 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
             classifyAndConsumeReturnDTO.setMoney(out);
             list.add(classifyAndConsumeReturnDTO);
         }
-        list = list.stream().sorted(Comparator.comparing(ClassifyAndConsumeReturnDTO::getMoney).
-                reversed()).collect(Collectors.toList());
+        list = list.stream().sorted(Comparator.comparing(ClassifyAndConsumeReturnDTO::getMoney))
+                .collect(Collectors.toList());
         return list;
+
     }
 }
