@@ -1,28 +1,31 @@
 package com.microfian.prac.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.microfian.prac.DTO.CConsumeItemDTO;
 import com.microfian.prac.DTO.CConsumeItemReturnDTO;
-import com.microfian.prac.entity.CConsumeItemPO;
-import org.apache.ibatis.annotations.Param;
+import com.microfian.prac.entity.ConsumeItem;
+import com.microfian.prac.request.ReqClassify;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface CConsumeItemPOMapper {
+public interface CConsumeItemPOMapper extends BaseMapper<ConsumeItem> {
     int deleteByPrimaryKey(String id);
 
-    int insert(CConsumeItemPO record);
+    int insert(ConsumeItem record);
 
-    int insertSelective(CConsumeItemPO record);
+    int insertSelective(ConsumeItem record);
 
-    CConsumeItemPO selectByPrimaryKey(String id);
+    ConsumeItem selectByPrimaryKey(String id);
 
     List<CConsumeItemReturnDTO> selByCondition(CConsumeItemDTO cConsumeItemDTO);
 
-    List<CConsumeItemPO> selByParentId(int id);
+    List<ConsumeItem> selByParentId(ReqClassify reqClassify);
 
-    int updateByPrimaryKeySelective(CConsumeItemPO record);
+    List<ConsumeItem> selById(ReqClassify reqClassify);
 
-    int updateByPrimaryKey(CConsumeItemPO record);
+    int updateByPrimaryKeySelective(ConsumeItem record);
+
+    int updateByPrimaryKey(ConsumeItem record);
 }

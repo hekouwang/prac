@@ -3,7 +3,7 @@ package com.microfian.prac.service.impl;
 import com.microfian.prac.DTO.CClassifyDTO;
 import com.microfian.prac.DTO.ClassifyChildrenVo;
 import com.microfian.prac.DTO.ClassifyVo;
-import com.microfian.prac.entity.CClassifyPO;
+import com.microfian.prac.entity.Classify;
 import com.microfian.prac.mapper.CClassifyPOMapper;
 import com.microfian.prac.service.CClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class CClassifyServiceImpl  implements CClassifyService {
     private CClassifyPOMapper cClassifyPOMapper;
 
     @Override
-    public List<CClassifyPO> selClassify(CClassifyDTO cClassifyDTO) {
+    public List<Classify> selClassify(CClassifyDTO cClassifyDTO) {
 
         return cClassifyPOMapper.selCClassify(cClassifyDTO);
 
@@ -31,20 +31,20 @@ public class CClassifyServiceImpl  implements CClassifyService {
 
         List<ClassifyVo> list=new ArrayList<>();
         cClassifyDTO.setParentId(0);
-        List<CClassifyPO> cClassifyPOS = cClassifyPOMapper.selCClassify(cClassifyDTO);
+        List<Classify> cClassifyPOS = cClassifyPOMapper.selCClassify(cClassifyDTO);
         if(CollectionUtils.isEmpty(cClassifyPOS)) {
             return list;
         }
 
-        for(CClassifyPO cClassifyPO:cClassifyPOS){
+        for(Classify cClassifyPO:cClassifyPOS){
             ClassifyVo classifyVo=new ClassifyVo();
             classifyVo.setValue(cClassifyPO.getId());
             classifyVo.setLabel(cClassifyPO.getClassifyName());
             List<ClassifyChildrenVo> list1=new ArrayList<>();
             cClassifyDTO.setParentId(cClassifyPO.getId());
-            List<CClassifyPO> cClassifyPOS1 = cClassifyPOMapper.selCClassify(cClassifyDTO);
+            List<Classify> cClassifyPOS1 = cClassifyPOMapper.selCClassify(cClassifyDTO);
             if(!CollectionUtils.isEmpty(cClassifyPOS1)){
-                for(CClassifyPO cClassifyPO1:cClassifyPOS1){
+                for(Classify cClassifyPO1:cClassifyPOS1){
                     ClassifyChildrenVo classifyChildrenVo=new ClassifyChildrenVo();
                     classifyChildrenVo.setLabel(cClassifyPO1.getClassifyName());
                     classifyChildrenVo.setValue(cClassifyPO1.getId());

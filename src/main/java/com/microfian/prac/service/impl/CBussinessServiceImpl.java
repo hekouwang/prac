@@ -3,7 +3,7 @@ package com.microfian.prac.service.impl;
 import com.microfian.prac.DTO.CConsumeItemDTO;
 import com.microfian.prac.entity.CAccountItemPO;
 import com.microfian.prac.entity.CAccountPO;
-import com.microfian.prac.entity.CConsumeItemPO;
+import com.microfian.prac.entity.ConsumeItem;
 import com.microfian.prac.mapper.CAccountItemPOMapper;
 import com.microfian.prac.mapper.CAccountPOMapper;
 import com.microfian.prac.mapper.CConsumeItemPOMapper;
@@ -38,11 +38,11 @@ public class CBussinessServiceImpl implements CBussinessService {
 
 
         //1 新增一条消费记录
-        CConsumeItemPO cConsumeItemPO = new CConsumeItemPO();
-        BeanUtils.copyProperties(cConsumeItemDTO,cConsumeItemPO);
-        cConsumeItemPO.setIsAvailable(1);
-        cConsumeItemPO.setIsDeleted(0);
-        cConsumeItemPOMapper.insert(cConsumeItemPO);
+        ConsumeItem consumeItem = new ConsumeItem();
+        BeanUtils.copyProperties(cConsumeItemDTO, consumeItem);
+        consumeItem.setIsAvailable(1);
+        consumeItem.setIsDeleted(0);
+        cConsumeItemPOMapper.insert(consumeItem);
 
         //2 账户变动
 
@@ -115,13 +115,13 @@ public class CBussinessServiceImpl implements CBussinessService {
         cAccountItemPOMapper.insert(cAccountItemPO);
 
         //5 增加一条转账记录
-        CConsumeItemPO cConsumeItemPO = new CConsumeItemPO();
-        BeanUtils.copyProperties(cConsumeItemDTO,cConsumeItemPO);
-        cConsumeItemPO.setId(LocalStringUtil.getUUID());
-        cConsumeItemPO.setConsumeType(3);
-        cConsumeItemPO.setIsAvailable(1);
-        cConsumeItemPO.setIsDeleted(0);
-        cConsumeItemPOMapper.insert(cConsumeItemPO);
+        ConsumeItem consumeItem = new ConsumeItem();
+        BeanUtils.copyProperties(cConsumeItemDTO, consumeItem);
+//        consumeItem.setId(LocalStringUtil.getUUID());
+        consumeItem.setConsumeType(3);
+        consumeItem.setIsAvailable(1);
+        consumeItem.setIsDeleted(0);
+        cConsumeItemPOMapper.insert(consumeItem);
         return null;
     }
 
@@ -130,12 +130,12 @@ public class CBussinessServiceImpl implements CBussinessService {
     public Object addOneIncome(CConsumeItemDTO cConsumeItemDTO,CAccountPO sourceAccount) {
 
         //1 新增一条收入记录
-        CConsumeItemPO cConsumeItemPO = new CConsumeItemPO();
-        BeanUtils.copyProperties(cConsumeItemDTO,cConsumeItemPO);
-        cConsumeItemPO.setId(LocalStringUtil.getUUID());
-        cConsumeItemPO.setIsAvailable(1);
-        cConsumeItemPO.setIsDeleted(0);
-        cConsumeItemPOMapper.insert(cConsumeItemPO);
+        ConsumeItem consumeItem = new ConsumeItem();
+        BeanUtils.copyProperties(cConsumeItemDTO, consumeItem);
+//        consumeItem.setId(LocalStringUtil.getUUID());
+        consumeItem.setIsAvailable(1);
+        consumeItem.setIsDeleted(0);
+        cConsumeItemPOMapper.insert(consumeItem);
 
         //2 账户变动
         if(sourceAccount.getAccountType()==1){

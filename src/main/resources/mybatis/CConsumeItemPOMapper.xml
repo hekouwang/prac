@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.microfian.prac.mapper.CConsumeItemPOMapper">
 
-    <resultMap id="BaseResultMap" type="com.microfian.prac.entity.CConsumeItemPO">
+    <resultMap id="BaseResultMap" type="com.microfian.prac.entity.ConsumeItem">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="money" jdbcType="DECIMAL" property="money"/>
         <result column="consume_type" jdbcType="INTEGER" property="consumeType"/>
@@ -119,7 +119,7 @@
         order by cci.create_time desc
     </select>
 
-    <select id="selByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selByParentId" parameterType="com.microfian.prac.request.ReqClassify" resultMap="BaseResultMap">
      SELECT
         cci.*
      FROM
@@ -127,9 +127,22 @@
         LEFT JOIN c_classify cc ON cci.classify_id = cc.id
      WHERE
         cc.parent_id = #{id}
-        and cci.consume_type=1
-         AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( '2020-06-01 00:00:00', '%Y-%m-%d %H:%i:%s' )
-      AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( '2020-06-30 23:59:59', '%Y-%m-%d %H:%i:%s' )
+        and cci.consume_type=#{classifyType}
+         AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s' )
+      AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
+  </select>
+
+    <select id="selById" parameterType="com.microfian.prac.request.ReqClassify" resultMap="BaseResultMap">
+     SELECT
+        cci.*
+     FROM
+        c_consume_item cci
+        LEFT JOIN c_classify cc ON cci.classify_id = cc.id
+     WHERE
+        cc.id = #{id}
+        and cci.consume_type=#{classfiyType}
+         AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s' )
+      AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
   </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -137,7 +150,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-    <insert id="insert" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+    <insert id="insert" parameterType="com.microfian.prac.entity.ConsumeItem">
     insert into c_consume_item (money, consume_type,
       classify_id, source_account, target_account, 
       merchant_id, project_id, remark, 
@@ -152,7 +165,7 @@
       #{accountBookId,jdbcType=VARCHAR})
   </insert>
 
-    <insert id="insertSelective" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+    <insert id="insertSelective" parameterType="com.microfian.prac.entity.ConsumeItem">
         insert into c_consume_item
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="money != null">
@@ -249,7 +262,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+    <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.ConsumeItem">
         update c_consume_item
         <set>
             <if test="money != null">
@@ -300,7 +313,7 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.CConsumeItemPO">
+    <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.ConsumeItem">
     update c_consume_item
     set money = #{money,jdbcType=DECIMAL},
       consume_type = #{consumeType,jdbcType=INTEGER},

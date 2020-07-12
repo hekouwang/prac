@@ -1,24 +1,25 @@
 package com.microfian.prac.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.microfian.prac.DTO.CClassifyDTO;
-import com.microfian.prac.entity.CClassifyPO ;
+import com.microfian.prac.entity.Classify ;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface CClassifyPOMapper {
+public interface CClassifyPOMapper extends BaseMapper<Classify> {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(CClassifyPO record);
+    int insert(Classify record);
 
-    int insertSelective(CClassifyPO record);
+    int insertSelective(Classify record);
 
-    CClassifyPO selectByPrimaryKey(Integer id);
+    Classify selectByPrimaryKey(Integer id);
 
-    List<CClassifyPO> selCClassify(CClassifyDTO cClassifyDTO);
+    List<Classify> selCClassify(CClassifyDTO cClassifyDTO);
 
-    int updateByPrimaryKeySelective(CClassifyPO record);
+    int updateByPrimaryKeySelective(Classify record);
 
-    int updateByPrimaryKey(CClassifyPO record);
+    int updateByPrimaryKey(Classify record);
 }

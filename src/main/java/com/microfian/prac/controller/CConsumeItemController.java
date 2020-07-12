@@ -4,6 +4,7 @@ import com.microfian.prac.DTO.CConsumeItemDTO;
 import com.microfian.prac.DTO.CConsumeItemReturnDTO;
 import com.microfian.prac.DTO.ClassifyAndConsumeReturnDTO;
 import com.microfian.prac.DTO.ResCConsumeItem;
+import com.microfian.prac.request.ReqClassify;
 import com.microfian.prac.service.CConsumeItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -44,10 +45,10 @@ public class CConsumeItemController {
     }
 
     @PostMapping(value = "/listConsumeItemGroupAndOrder")
-    public Object listConsumeItemGroupAndOrder(@RequestBody CConsumeItemDTO cConsumeItemDTO) {
+    public Object listConsumeItemGroupAndOrder(@RequestBody ReqClassify reqClassify) {
 
         List<ClassifyAndConsumeReturnDTO> classifyAndConsumeReturnDTOS =
-                cConsumeItemService.listConsumeItemGroupAndOrder(cConsumeItemDTO);
+                cConsumeItemService.listConsumeItemGroupAndOrder(reqClassify);
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
         List<String> classifyList=new ArrayList<>();

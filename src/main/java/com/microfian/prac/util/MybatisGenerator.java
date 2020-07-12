@@ -28,7 +28,7 @@
      private static String authorName="tony";
      //要生成的表名
  //    private static String[] tables= {"prod_additional","prod_attraction","prod_board","prod_board_info","prod_book_limit","prod_goods","prod_goods_include","prod_hotel_type","prod_linked","prod_product","prod_product_image","prod_ticket_tips","prod_ticket_type","prod_traffic_info","prod_traffic_type","prod_trip"};
-     private static String[] tables= {"prod_goods_book_limit"};
+     private static String[] tables= {"c_classify"};
 
 
 
@@ -36,15 +36,17 @@
 
      //table前缀
  //    private static String[] tables={"contract"};
-     private static String prefix="prod_";
+     private static String prefix="c_";
 
      //数据库配置四要素
      private static String driverName = "com.mysql.cj.jdbc.Driver";
-     private static String url = "jdbc:mysql://10.200.2.151:3306/vacation?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true";
+     private static String url =
+             "jdbc:mysql://127.0.0.1:3306/c_fian_online?useUnicode=true&characterEncoding=utf8" +
+                     "&allowMultiQueries=true&serverTimezone=GMT";
  //private static String url = "jdbc:mysql://10.200.2.151:3306/connector?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true";
 
-     private static String username = "dev";
-     private static String password = "dev123456";
+     private static String username = "root";
+     private static String password = "root";
 
 
      public static void main(String[] args) {
