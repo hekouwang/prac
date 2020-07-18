@@ -137,12 +137,12 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
         }
 
         //判断是支出还是收入 ，默认是支出
-        if(null == reqClassify.getClassifyLevel() || 1 == reqClassify.getClassifyLevel()){
+        if(null == reqClassify.getClassifyType() || 1 == reqClassify.getClassifyType()){
             reqClassify.setClassifyType(1);
-            queryWrapper.eq("classfiy_type",1);
+            queryWrapper.eq("classify_type",1);
         }else {
             reqClassify.setClassifyType(2);
-            queryWrapper.eq("classfiy_type",2);
+            queryWrapper.eq("classify_type",2);
 
         }
 
@@ -154,6 +154,8 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
             String endTime = reqClassify.getStartAndEndTime().get(1) + " 23:59:59";
             cConsumeItemDTO.setStartTime(startTime);
             cConsumeItemDTO.setEndTime(endTime);
+            reqClassify.setStartTime(startTime);
+            reqClassify.setEndTime(endTime);
         } else {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -192,6 +194,7 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
             classifyAndConsumeReturnDTO.setMoney(out);
             list.add(classifyAndConsumeReturnDTO);
         }
+        list.removeIf(classifyAndConsumeReturnDTO -> classifyAndConsumeReturnDTO.getMoney().compareTo(new BigDecimal("0")) == 0);
         list = list.stream().sorted(Comparator.comparing(ClassifyAndConsumeReturnDTO::getMoney))
                 .collect(Collectors.toList());
         return list;

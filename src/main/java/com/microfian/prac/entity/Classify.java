@@ -67,7 +67,7 @@ public class Classify extends Model<Classify> {
     /**
      * 分类类型（1 出 2 入）
      */
-    private String classfiyType;
+    private String classifyType;
 
     /**
      * 账本id

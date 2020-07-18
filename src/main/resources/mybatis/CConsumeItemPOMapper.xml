@@ -140,7 +140,7 @@
         LEFT JOIN c_classify cc ON cci.classify_id = cc.id
      WHERE
         cc.id = #{id}
-        and cci.consume_type=#{classfiyType}
+        and cci.consume_type=#{classifyType}
          AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s' )
       AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
   </select>
