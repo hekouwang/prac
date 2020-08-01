@@ -11,6 +11,7 @@
     <result column="is_available" jdbcType="INTEGER" property="isAvailable" />
     <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
     <result column="classify_order" jdbcType="INTEGER" property="classifyOrder" />
+    <result column="classify_type" jdbcType="INTEGER" property="classifyType" />
   </resultMap>
 
 
@@ -36,6 +37,9 @@
         and is_available=1
         <if test="parentId !=null" >
             and parent_id=#{parentId}
+        </if>
+        <if test="classifyType !=null">
+            and classify_type=#{classifyType}
         </if>
   </select>
 

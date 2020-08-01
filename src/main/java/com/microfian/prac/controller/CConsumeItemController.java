@@ -5,6 +5,7 @@ import com.microfian.prac.DTO.CConsumeItemReturnDTO;
 import com.microfian.prac.DTO.ClassifyAndConsumeReturnDTO;
 import com.microfian.prac.DTO.ResCConsumeItem;
 import com.microfian.prac.request.ReqClassify;
+import com.microfian.prac.response.ResMoneyAndClassify;
 import com.microfian.prac.service.CConsumeItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -58,6 +59,33 @@ public class CConsumeItemController {
             for(ClassifyAndConsumeReturnDTO classifyAndConsumeReturnDTO:classifyAndConsumeReturnDTOS){
                 classifyList.add(classifyAndConsumeReturnDTO.getClassifyName());
                 moneyList.add(classifyAndConsumeReturnDTO.getMoney());
+            }
+            map1.put("classifyList",classifyList);
+            map1.put("moneyList",moneyList);
+        }
+        map.put("data", map1);
+        map.put("code", 20000);
+        return map;
+
+    }
+
+    @PostMapping(value = "/listConsumeItemGroupAndOrderCake")
+    public Object listConsumeItemGroupAndOrderCake(@RequestBody ReqClassify reqClassify) {
+
+        List<ClassifyAndConsumeReturnDTO> classifyAndConsumeReturnDTOS =
+                cConsumeItemService.listConsumeItemGroupAndOrder(reqClassify);
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map1 = new HashMap<>();
+        List<String> classifyList=new ArrayList<>();
+        List<ResMoneyAndClassify> moneyList=new ArrayList<>();
+        if(!CollectionUtils.isEmpty(classifyAndConsumeReturnDTOS)){
+            map1.put("total", classifyAndConsumeReturnDTOS.size());
+            for(ClassifyAndConsumeReturnDTO classifyAndConsumeReturnDTO:classifyAndConsumeReturnDTOS){
+                classifyList.add(classifyAndConsumeReturnDTO.getClassifyName());
+                ResMoneyAndClassify resMoneyAndClassify=new ResMoneyAndClassify();
+                resMoneyAndClassify.setValue(classifyAndConsumeReturnDTO.getMoney());
+                resMoneyAndClassify.setName(classifyAndConsumeReturnDTO.getClassifyName());
+                moneyList.add(resMoneyAndClassify);
             }
             map1.put("classifyList",classifyList);
             map1.put("moneyList",moneyList);

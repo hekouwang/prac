@@ -25,4 +25,9 @@ public class CClassifyDTO {
 
     private Integer order;
 
+    /**
+     * 分类类型（1 出 2 入）
+     */
+    private String classifyType;
+
 }

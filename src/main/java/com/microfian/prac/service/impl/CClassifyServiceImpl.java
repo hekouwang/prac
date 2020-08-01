@@ -31,6 +31,7 @@ public class CClassifyServiceImpl  implements CClassifyService {
 
         List<ClassifyVo> list=new ArrayList<>();
         cClassifyDTO.setParentId(0);
+
         List<Classify> cClassifyPOS = cClassifyPOMapper.selCClassify(cClassifyDTO);
         if(CollectionUtils.isEmpty(cClassifyPOS)) {
             return list;
