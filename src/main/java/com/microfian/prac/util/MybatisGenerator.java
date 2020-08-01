@@ -25,10 +25,10 @@
      //基本包名
      private static String basePackage="com.joyuai.vacation.product.dao.generator";
      //作者
-     private static String authorName="tony";
+     private static String authorName="hekouwang";
      //要生成的表名
  //    private static String[] tables= {"prod_additional","prod_attraction","prod_board","prod_board_info","prod_book_limit","prod_goods","prod_goods_include","prod_hotel_type","prod_linked","prod_product","prod_product_image","prod_ticket_tips","prod_ticket_type","prod_traffic_info","prod_traffic_type","prod_trip"};
-     private static String[] tables= {"c_classify"};
+     private static String[] tables= {"c_wish"};
 
 
 
