@@ -33,6 +33,34 @@ public class Result<T> {
         return msg;
     }
 
+
+    public static Result success() {
+        Result result = new Result();
+        result.setCode(ResultEnum.SUCCESS.getCode());
+        return result;
+    }
+
+    public static Result success(Object data) {
+        Result result = new Result();
+        result.setCode(ResultEnum.SUCCESS.getCode());
+        result.setData(data);
+        return result;
+    }
+
+    public static Result failure(Integer resultCode) {
+        Result result = new Result();
+        result.setCode(resultCode);
+        return result;
+    }
+
+    public static Result failure(Integer resultCode, Object data) {
+        Result result = new Result();
+        result.setCode(resultCode);
+        result.setData(data);
+        return result;
+    }
+
+
     public void setMsg(String msg) {
         this.msg = msg;
     }

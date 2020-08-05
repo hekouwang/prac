@@ -1,16 +1,15 @@
-package com.microfian.prac.entity;
+package com.microfian.prac.request;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author hekouwang
@@ -19,8 +18,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("c_wish")
-public class Wish extends Model<Wish> {
+public class ReqWish  {
 
     private static final long serialVersionUID = 1L;
 
@@ -74,9 +72,10 @@ public class Wish extends Model<Wish> {
     private Integer accountBookId;
 
 
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
+    private Integer current;
+
+    private Integer pageSize;
+
+
 
 }
