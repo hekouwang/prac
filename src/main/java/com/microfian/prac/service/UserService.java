@@ -10,4 +10,6 @@ import com.microfian.prac.entity.User;
  */
 public interface UserService extends IService<User> {
 
+   User selectByName(String name);
+
 }

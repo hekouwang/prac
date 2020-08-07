@@ -31,6 +31,12 @@ public class User extends Model<User> {
     private String username;
 
     /**
+     * 密码
+     */
+    private String password;
+
+
+    /**
      * 创建时间
      */
     private String createTime;
