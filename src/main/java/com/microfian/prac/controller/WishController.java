@@ -2,6 +2,7 @@ package com.microfian.prac.controller;
 
 
 import com.microfian.prac.DTO.CAccountDTO;
+import com.microfian.prac.request.ReqWish;
 import com.microfian.prac.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,13 +26,14 @@ public class WishController {
     @Autowired
     private WishService wishService;
 
-    @PostMapping(value = "/listAccount")
-    public Object listAccount(@RequestBody CAccountDTO cAccountDTO) {
+    @PostMapping(value = "/listWish")
+    public Object listAccount(@RequestBody ReqWish reqWish) {
 
-//        wishService.page()
-        Map map = new HashMap<>();
-        map.put("code",20000);
-//        map.put("data", cAccountService.selAccount(cAccountDTO));
-        return map;
+        try {
+            return wishService.listWishPage(reqWish);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

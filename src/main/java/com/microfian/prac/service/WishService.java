@@ -10,6 +10,7 @@ import com.microfian.prac.response.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -20,7 +21,10 @@ import java.util.List;
 @Component
 public interface WishService extends IService<Wish> {
 
-    Result<List<ResWish>>  listWishPage(ReqWish reqWish);
+    Result<List<ResWish>>  listWishPage(ReqWish reqWish) throws ParseException;
+
+
+    int  addWish(ReqWish reqWish) ;
 
 
 

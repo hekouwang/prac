@@ -10,9 +10,16 @@ import com.microfian.prac.request.ReqWish;
 import com.microfian.prac.response.ResWish;
 import com.microfian.prac.response.Result;
 import com.microfian.prac.service.WishService;
+import com.microfian.prac.util.DateUtil;
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,7 +34,7 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
     private WishMapper wishMapper;
 
     @Override
-    public Result<List<ResWish>> listWishPage(ReqWish reqWish) {
+    public Result<List<ResWish>> listWishPage(ReqWish reqWish) throws ParseException {
 
         Result<List<ResWish>> result=new Result<>();
         IPage<Wish> iPage=new Page<>();
@@ -35,7 +42,33 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
         iPage.setSize(reqWish.getPageSize());
         QueryWrapper<Wish> queryWrapper=new QueryWrapper<>();
         IPage<Wish> page = page(iPage, queryWrapper);
+        List<Wish> records = page.getRecords();
+        List<ResWish> resWishList=new ArrayList<>();
+        if(CollectionUtils.isEmpty(records)){
+            return result;
+        }
+        try {
+            for(Wish wish:records){
+                ResWish resWish=new ResWish();
+                BeanUtils.copyProperties(wish,resWish);
+                resWishList.add(resWish);
+                resWish.setApartDays(DateUtil.daysBetween(resWish.getAccomplishTime(),resWish.getCreateTime()));
+            }
+        } catch (BeansException | ParseException e) {
+            e.printStackTrace();
+        }
+        result.setTotal(page.getTotal());
+        result.setMsg("成功");
+        result.setData(resWishList);
         return result;
 
+    }
+
+    @Override
+    public int addWish(ReqWish reqWish) {
+        Wish wish=new Wish();
+        BeanUtils.copyProperties(reqWish,wish);
+        wish.setCreateTime(new Date());
+        return 0;
     }
 }

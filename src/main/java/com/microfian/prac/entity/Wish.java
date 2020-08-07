@@ -55,7 +55,7 @@ public class Wish extends Model<Wish> {
     /**
      * 创建时间
      */
-    private String createTime;
+    private Date createTime;
 
     /**
      * 更新时间

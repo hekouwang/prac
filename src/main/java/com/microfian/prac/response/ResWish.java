@@ -73,6 +73,8 @@ public class ResWish {
 
     private Integer pageSize;
 
+    private Integer apartDays;
+
 
 
 }

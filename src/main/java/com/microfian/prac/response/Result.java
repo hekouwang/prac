@@ -9,6 +9,8 @@ public class Result<T> {
 
     private Integer code;
     private String msg;
+
+    private Long total;
     private T data;
 
     public Result() {
