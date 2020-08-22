@@ -60,7 +60,4 @@ public class CConsumeItemDTO {
 
     private String endTime;
 
-
-
-
 }

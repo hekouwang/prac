@@ -11,4 +11,8 @@ public class ClassifyChildrenVo {
 
     private Integer value;
 
+    private Integer id;
+
+    private Integer parentId;
+
 }

@@ -4,6 +4,7 @@ import com.microfian.prac.DTO.CAccountDTO;
 import com.microfian.prac.DTO.CClassifyDTO;
 import com.microfian.prac.entity.CAccountPO;
 import com.microfian.prac.mapper.CClassifyPOMapper;
+import com.microfian.prac.request.ReqClassify;
 import com.microfian.prac.service.CAccountService;
 import com.microfian.prac.service.CClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +39,17 @@ public class CClassifyController {
         map.put("code",20000);
         map.put("data", cClassifyService.selClassifyByGroup(cClassifyDTO));
         return map;
+    }
+
+    @PostMapping(value = "/getByIdOrParentId")
+    public Object getByIdOrParentId(@RequestBody ReqClassify reqClassify) {
+
+        try {
+            return cClassifyService.getByIdOrParentId(reqClassify);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

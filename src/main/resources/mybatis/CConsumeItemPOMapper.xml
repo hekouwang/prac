@@ -108,6 +108,13 @@
                 #{item}
             </foreach>
         </if>
+        <if test="relationList!=null and relationList.size() >0">
+            AND cci.relation_id in
+            <foreach collection="relationList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
         <if test="startTime !=null and startTime !=''">
             AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s'
             )

@@ -1,5 +1,6 @@
-package com.microfian.prac.DTO;
+package com.microfian.prac.response;
 
+import com.microfian.prac.DTO.ClassifyChildrenVo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -7,11 +8,15 @@ import java.util.List;
 
 @Component
 @Data
-public class ClassifyVo {
+public class ResClassifyVo {
 
     private String label;
 
     private Integer value;
+
+    private Integer id;
+
+    private Integer parentId;
 
     private List<ClassifyChildrenVo> children;
 }
