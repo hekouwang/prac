@@ -15,4 +15,6 @@ public class ClassifyChildrenVo {
 
     private Integer parentId;
 
+    private String name;
+
 }

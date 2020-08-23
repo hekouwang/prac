@@ -5,6 +5,7 @@ import com.microfian.prac.DTO.CClassifyDTO;
 import com.microfian.prac.entity.CAccountPO;
 import com.microfian.prac.mapper.CClassifyPOMapper;
 import com.microfian.prac.request.ReqClassify;
+import com.microfian.prac.request.ReqWish;
 import com.microfian.prac.service.CAccountService;
 import com.microfian.prac.service.CClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,22 @@ public class CClassifyController {
 
         try {
             return cClassifyService.getByIdOrParentId(reqClassify);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 增加分类
+     * @param reqClassify
+     * @return
+     */
+    @PostMapping(value = "/addClassify")
+    public Object listAccount(@RequestBody ReqClassify reqClassify) {
+
+        try {
+            return cClassifyService.addClassify(reqClassify);
         } catch (Exception e) {
             e.printStackTrace();
         }

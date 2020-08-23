@@ -9,12 +9,16 @@ import com.microfian.prac.response.ResClassifyVo;
 import com.microfian.prac.entity.Classify;
 import com.microfian.prac.mapper.CClassifyPOMapper;
 import com.microfian.prac.response.Result;
+import com.microfian.prac.response.ResultEnum;
 import com.microfian.prac.service.CClassifyService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +26,35 @@ public class CClassifyServiceImpl  implements CClassifyService {
 
     @Autowired
     private CClassifyPOMapper cClassifyPOMapper;
+
+    @Override
+    public Result addClassify(ReqClassify reqClassify) {
+
+        Classify classify=new Classify();
+        BeanUtils.copyProperties(reqClassify,classify);
+        SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = format0.format(new Date());
+        if(null ==classify.getParentId()){
+            classify.setParentId(0);
+        }
+        classify.setCreateTime(time);
+        classify.setIsAvailable(1);
+        classify.setIsDeleted(0);
+        cClassifyPOMapper.insert(classify);
+        return Result.success();
+
+    }
+
+    @Override
+    public Result forbidClassify(ReqClassify reqClassify) {
+        if(null==reqClassify || null==reqClassify.getId() || null==reqClassify.getIsAvailable()){
+            return  Result.failure(ResultEnum.UNKNOWN_ERROR.getCode());
+        }
+        Classify classify=new Classify();
+        BeanUtils.copyProperties(reqClassify,classify);
+        cClassifyPOMapper.updateById(classify);
+        return Result.success();
+    }
 
     @Override
     public List<Classify> selClassify(CClassifyDTO cClassifyDTO) {
@@ -47,6 +80,7 @@ public class CClassifyServiceImpl  implements CClassifyService {
             classifyVo.setId(cClassifyPO.getId());
             classifyVo.setParentId(cClassifyPO.getParentId());
             classifyVo.setLabel(cClassifyPO.getClassifyName());
+            classifyVo.setName(cClassifyPO.getClassifyName());
             List<ClassifyChildrenVo> list1=new ArrayList<>();
             cClassifyDTO.setParentId(cClassifyPO.getId());
             List<Classify> cClassifyPOS1 = cClassifyPOMapper.selCClassify(cClassifyDTO);
@@ -56,6 +90,7 @@ public class CClassifyServiceImpl  implements CClassifyService {
                     classifyChildrenVo.setLabel(cClassifyPO1.getClassifyName());
                     classifyChildrenVo.setValue(cClassifyPO1.getId());
                     classifyChildrenVo.setId(cClassifyPO1.getId());
+                    classifyChildrenVo.setName(cClassifyPO1.getClassifyName());
                     classifyChildrenVo.setParentId(cClassifyPO1.getParentId());
                     list1.add(classifyChildrenVo);
                 }

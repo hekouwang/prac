@@ -17,4 +17,8 @@ public interface CClassifyService {
 
     Result<List<Classify>> getByIdOrParentId(ReqClassify reqClassify);
 
+    Result addClassify (ReqClassify reqClassify);
+
+    Result forbidClassify (ReqClassify reqClassify);
+
 }

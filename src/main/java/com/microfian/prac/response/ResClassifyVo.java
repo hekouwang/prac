@@ -18,5 +18,7 @@ public class ResClassifyVo {
 
     private Integer parentId;
 
+    private String name;
+
     private List<ClassifyChildrenVo> children;
 }
