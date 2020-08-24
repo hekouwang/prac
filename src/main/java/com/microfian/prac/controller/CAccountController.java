@@ -1,7 +1,7 @@
 package com.microfian.prac.controller;
 
 import com.microfian.prac.DTO.CAccountDTO;
-import com.microfian.prac.entity.CAccountPO;
+import com.microfian.prac.entity.Account;
 import com.microfian.prac.entity.CMerchantPO;
 import com.microfian.prac.service.CAccountService;
 import com.microfian.prac.service.CMerchantService;
@@ -22,8 +22,8 @@ public class CAccountController {
     private CAccountService cAccountService;
 
     @PostMapping(value = "/addAccount")
-    public Object addAccount(@RequestBody CAccountPO cAccountPO){
-        return cAccountService.addAccount(cAccountPO);
+    public Object addAccount(@RequestBody Account Account){
+        return cAccountService.addAccount(Account);
     }
 
     @PostMapping(value = "/listAccount")

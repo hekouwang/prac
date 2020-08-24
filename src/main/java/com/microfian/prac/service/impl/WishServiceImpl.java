@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.microfian.prac.entity.Wish;
-import com.microfian.prac.mapper.CAccountPOMapper;
+import com.microfian.prac.mapper.AccountMapper;
 import com.microfian.prac.mapper.WishMapper;
 import com.microfian.prac.request.ReqWish;
 import com.microfian.prac.response.ResWish;
@@ -35,7 +35,7 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
     private WishMapper wishMapper;
 
     @Autowired
-    private CAccountPOMapper cAccountPOMapper;
+    private AccountMapper AccountMapper;
 
     @Override
     public Result<List<ResWish>> listWishPage(ReqWish reqWish) throws ParseException {
@@ -55,7 +55,7 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
             for(Wish wish:records){
                 ResWish resWish=new ResWish();
                 BeanUtils.copyProperties(wish,resWish);
-//                cAccountPOMapper.s
+//                AccountMapper.s
                 resWishList.add(resWish);
 //                resWish.setApartDays(DateUtil.daysBetween(resWish.getAccomplishTime(),resWish.getCreateTime()));
             }

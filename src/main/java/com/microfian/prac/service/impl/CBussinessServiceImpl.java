@@ -2,10 +2,10 @@ package com.microfian.prac.service.impl;
 
 import com.microfian.prac.DTO.CConsumeItemDTO;
 import com.microfian.prac.entity.CAccountItemPO;
-import com.microfian.prac.entity.CAccountPO;
+import com.microfian.prac.entity.Account;
 import com.microfian.prac.entity.ConsumeItem;
 import com.microfian.prac.mapper.CAccountItemPOMapper;
-import com.microfian.prac.mapper.CAccountPOMapper;
+import com.microfian.prac.mapper.AccountMapper;
 import com.microfian.prac.mapper.CConsumeItemPOMapper;
 import com.microfian.prac.service.CBussinessService;
 import com.microfian.prac.util.LocalStringUtil;
@@ -26,7 +26,7 @@ public class CBussinessServiceImpl implements CBussinessService {
     private CAccountItemPOMapper cAccountItemPOMapper;
 
     @Autowired
-    private CAccountPOMapper cAccountPOMapper;
+    private AccountMapper AccountMapper;
 
     @Autowired
     private CConsumeItemPOMapper cConsumeItemPOMapper;
@@ -34,7 +34,7 @@ public class CBussinessServiceImpl implements CBussinessService {
 
     @Override
     @Transactional
-    public Object addOneExpand(CConsumeItemDTO cConsumeItemDTO,CAccountPO cAccountPO) {
+    public Object addOneExpand(CConsumeItemDTO cConsumeItemDTO,Account Account) {
 
 
         //1 新增一条消费记录
@@ -46,15 +46,15 @@ public class CBussinessServiceImpl implements CBussinessService {
 
         //2 账户变动
 
-        if(cAccountPO.getAccountType()==1){
-            cAccountPO.setBalance(cAccountPO.getBalance().subtract(cConsumeItemDTO.getMoney()));
+        if(Account.getAccountType()==1){
+            Account.setBalance(Account.getBalance().subtract(cConsumeItemDTO.getMoney()));
         }else {
-            cAccountPO.setBalance(cAccountPO.getBalance().add(cConsumeItemDTO.getMoney()));
+            Account.setBalance(Account.getBalance().add(cConsumeItemDTO.getMoney()));
         }
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
-        cAccountPO.setUpdateTime(time);
-        cAccountPOMapper.updateByPrimaryKey(cAccountPO);
+//        account.setUpdateTime(time);
+        AccountMapper.updateByPrimaryKey(Account);
 
         //3 新增一条账户变动记录
         CAccountItemPO cAccountItemPO = new CAccountItemPO();
@@ -73,7 +73,7 @@ public class CBussinessServiceImpl implements CBussinessService {
 
     @Override
     @Transactional
-    public Object tranferAccount(CConsumeItemDTO cConsumeItemDTO,CAccountPO sourceAccount,CAccountPO targetAccount) {
+    public Object tranferAccount(CConsumeItemDTO cConsumeItemDTO,Account sourceAccount,Account targetAccount) {
 
         //1 源账户扣减
         if(sourceAccount.getAccountType()==1){
@@ -83,8 +83,8 @@ public class CBussinessServiceImpl implements CBussinessService {
         }
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
-        sourceAccount.setUpdateTime(time);
-        cAccountPOMapper.updateByPrimaryKey(sourceAccount);
+//        sourceAccount.setUpdateTime(new Date());
+        AccountMapper.updateByPrimaryKey(sourceAccount);
 
         //2 目标账户增加
         if(targetAccount.getAccountType()==1){
@@ -93,8 +93,8 @@ public class CBussinessServiceImpl implements CBussinessService {
             targetAccount.setBalance(targetAccount.getBalance().subtract(cConsumeItemDTO.getMoney()));
         }
         String time1 = format0.format(new Date());
-        targetAccount.setUpdateTime(time);
-        cAccountPOMapper.updateByPrimaryKey(targetAccount);
+//        targetAccount.setUpdateTime(new Date());
+        AccountMapper.updateByPrimaryKey(targetAccount);
 
         //3 源账户增加一条记录
         CAccountItemPO cAccountItemPO = new CAccountItemPO();
@@ -127,7 +127,7 @@ public class CBussinessServiceImpl implements CBussinessService {
 
     @Override
     @Transactional
-    public Object addOneIncome(CConsumeItemDTO cConsumeItemDTO,CAccountPO sourceAccount) {
+    public Object addOneIncome(CConsumeItemDTO cConsumeItemDTO,Account sourceAccount) {
 
         //1 新增一条收入记录
         ConsumeItem consumeItem = new ConsumeItem();
@@ -145,8 +145,8 @@ public class CBussinessServiceImpl implements CBussinessService {
         }
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
-        sourceAccount.setUpdateTime(time);
-        cAccountPOMapper.updateByPrimaryKey(sourceAccount);
+//        sourceAccount.setUpdateTime(time);
+        AccountMapper.updateByPrimaryKey(sourceAccount);
 
 
         //3 新增一条账户变动记录

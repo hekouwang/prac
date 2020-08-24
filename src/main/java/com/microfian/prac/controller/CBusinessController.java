@@ -1,7 +1,7 @@
 package com.microfian.prac.controller;
 
 import com.microfian.prac.DTO.CConsumeItemDTO;
-import com.microfian.prac.entity.CAccountPO;
+import com.microfian.prac.entity.Account;
 import com.microfian.prac.service.CAccountService;
 import com.microfian.prac.service.CBussinessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +34,14 @@ public class CBusinessController {
             return null;
         }
 
-        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO.getSourceAccount());
+        Account Account = checkAccount(cConsumeItemDTO.getSourceAccount());
 
-        if(null ==cAccountPO){
+        if(null ==Account){
             return null;
         }
         Map map = new HashMap<>();
         map.put("code",20000);
-        map.put("data", cBussinessService.addOneExpand(cConsumeItemDTO,cAccountPO));
+        map.put("data", cBussinessService.addOneExpand(cConsumeItemDTO,Account));
         return map;
 
     }
@@ -56,15 +56,15 @@ public class CBusinessController {
             return null;
         }
 
-        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO.getSourceAccount());
-        CAccountPO cAccountPO1 = checkAccount(cConsumeItemDTO.getTargetAccount());
+        Account Account = checkAccount(cConsumeItemDTO.getSourceAccount());
+        Account Account1 = checkAccount(cConsumeItemDTO.getTargetAccount());
 
-        if(null ==cAccountPO){
+        if(null ==Account){
             return null;
         }
         Map map = new HashMap<>();
         map.put("code",20000);
-        map.put("data", cBussinessService.tranferAccount(cConsumeItemDTO,cAccountPO,cAccountPO1));
+        map.put("data", cBussinessService.tranferAccount(cConsumeItemDTO,Account,Account1));
         return map;
 
     }
@@ -79,19 +79,19 @@ public class CBusinessController {
             return null;
         }
 
-        CAccountPO cAccountPO = checkAccount(cConsumeItemDTO.getSourceAccount());
+        Account Account = checkAccount(cConsumeItemDTO.getSourceAccount());
 
-        if(null ==cAccountPO){
+        if(null ==Account){
             return null;
         }
         Map map = new HashMap<>();
         map.put("code",20000);
-        map.put("data", cBussinessService.addOneIncome(cConsumeItemDTO,cAccountPO));
+        map.put("data", cBussinessService.addOneIncome(cConsumeItemDTO,Account));
         return map;
 
     }
 
-    private CAccountPO checkAccount(String  accountId){
+    private Account checkAccount(String  accountId){
 
         return cAccountService.selAccountById(accountId);
 

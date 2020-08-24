@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.microfian.prac.mapper.CAccountPOMapper">
-  <resultMap id="BaseResultMap" type="com.microfian.prac.entity.CAccountPO">
+<mapper namespace="com.microfian.prac.mapper.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.microfian.prac.entity.Account">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="account_name" jdbcType="VARCHAR" property="accountName" />
     <result column="parent_account_id" jdbcType="VARCHAR" property="parentAccountId" />
@@ -41,7 +41,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.microfian.prac.entity.CAccountPO">
+  <insert id="insert" parameterType="com.microfian.prac.entity.Account">
     insert into c_account (account_name, parent_account_id,
       balance, account_type, create_time, 
       update_time, is_available, is_deleted, 
@@ -52,7 +52,7 @@
       #{userId,jdbcType=VARCHAR})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.microfian.prac.entity.CAccountPO">
+  <insert id="insertSelective" parameterType="com.microfian.prac.entity.Account">
     insert into c_account
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="accountName != null">
@@ -114,7 +114,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.CAccountPO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.entity.Account">
     update c_account
     <set>
       <if test="accountName != null">
@@ -148,7 +148,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.CAccountPO">
+  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.entity.Account">
     update c_account
     set account_name = #{accountName,jdbcType=VARCHAR},
       parent_account_id = #{parentAccountId,jdbcType=VARCHAR},

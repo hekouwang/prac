@@ -1,8 +1,8 @@
 package com.microfian.prac.service.impl;
 
 import com.microfian.prac.DTO.CAccountDTO;
-import com.microfian.prac.entity.CAccountPO;
-import com.microfian.prac.mapper.CAccountPOMapper;
+import com.microfian.prac.entity.Account;
+import com.microfian.prac.mapper.AccountMapper;
 import com.microfian.prac.service.CAccountService;
 import com.microfian.prac.util.LocalStringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -19,28 +19,28 @@ public class CAccountServiceImpl implements CAccountService {
 
 
     @Autowired
-    CAccountPOMapper cAccountPOMapper;
+    AccountMapper AccountMapper;
 
 
     @Override
-    public int addAccount(CAccountPO cAccountPO) {
-        cAccountPO.setIsAvailable(1);
-        cAccountPO.setId(LocalStringUtil.getUUID());
+    public int addAccount(Account account) {
+        account.setIsAvailable(1);
+//        account.setId(LocalStringUtil.getUUID());
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
-        cAccountPO.setCreateTime(time);
-        cAccountPO.setIsDeleted(0);
-        return cAccountPOMapper.insert(cAccountPO);
+        account.setCreateTime(time);
+        account.setIsDeleted(0);
+        return AccountMapper.insert(account);
     }
 
     @Override
-    public CAccountPO selAccountById(String id) {
-        return cAccountPOMapper.selectByPrimaryKey(id);
+    public Account selAccountById(String id) {
+        return AccountMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public List<CAccountPO> selAccount(CAccountDTO cAccountDTO) {
-        return cAccountPOMapper.selCAcount(cAccountDTO);
+    public List<Account> selAccount(CAccountDTO cAccountDTO) {
+        return AccountMapper.selCAcount(cAccountDTO);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CAccountServiceImpl implements CAccountService {
     }
 
     @Override
-    public List<CAccountPO> listAccount() {
+    public List<Account> listAccount() {
         return null;
     }
 }

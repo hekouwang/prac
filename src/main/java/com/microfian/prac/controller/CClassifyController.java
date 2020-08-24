@@ -2,7 +2,7 @@ package com.microfian.prac.controller;
 
 import com.microfian.prac.DTO.CAccountDTO;
 import com.microfian.prac.DTO.CClassifyDTO;
-import com.microfian.prac.entity.CAccountPO;
+import com.microfian.prac.entity.Account;
 import com.microfian.prac.mapper.CClassifyPOMapper;
 import com.microfian.prac.request.ReqClassify;
 import com.microfian.prac.request.ReqWish;

@@ -1,19 +1,19 @@
 package com.microfian.prac.service;
 
 import com.microfian.prac.DTO.CAccountDTO;
-import com.microfian.prac.entity.CAccountPO;
+import com.microfian.prac.entity.Account;
 
 import java.util.List;
 
 public interface CAccountService {
 
-    int addAccount(CAccountPO cAccountPO);
+    int addAccount(Account Account);
 
-    CAccountPO selAccountById(String  id);
+    Account selAccountById(String  id);
 
-    List<CAccountPO> selAccount(CAccountDTO cAccountDTO);
+    List<Account> selAccount(CAccountDTO cAccountDTO);
 
     int updateAccount();
 
-    List<CAccountPO> listAccount();
+    List<Account> listAccount();
 }
