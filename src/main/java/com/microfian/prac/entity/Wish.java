@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.Date;
@@ -32,10 +34,23 @@ public class Wish extends Model<Wish> {
      */
     private String name;
 
+    private Integer accountId;
+
     /**
-     * 实现时间
+     * 总金额
      */
-    private String accomplishTime;
+    private BigDecimal totalMoney;
+
+
+    /**
+     * 每日金额
+     */
+    private BigDecimal dayMoney;
+
+    /**
+     * 余额
+     */
+    private BigDecimal balance;
 
     /**
      * 状态
