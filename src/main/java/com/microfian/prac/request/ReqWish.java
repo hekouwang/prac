@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -29,6 +30,25 @@ public class ReqWish  {
      * 心愿名称
      */
     private String name;
+
+    private Integer accountId;
+
+    /**
+     * 总金额
+     */
+    private BigDecimal totalMoney;
+
+
+    /**
+     * 每日金额
+     */
+    private BigDecimal dayMoney;
+
+    /**
+     * 余额
+     */
+    private BigDecimal balance;
+
 
     /**
      * 实现时间
@@ -75,6 +95,8 @@ public class ReqWish  {
     private Integer current;
 
     private Integer pageSize;
+
+    private Long apartDays;
 
 
 

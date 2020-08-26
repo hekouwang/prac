@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.microfian.prac.entity.Account;
 import com.microfian.prac.entity.Wish;
 import com.microfian.prac.mapper.AccountMapper;
 import com.microfian.prac.mapper.WishMapper;
@@ -18,6 +19,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +37,7 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
     private WishMapper wishMapper;
 
     @Autowired
-    private AccountMapper AccountMapper;
+    private AccountMapper accountMapper;
 
     @Override
     public Result<List<ResWish>> listWishPage(ReqWish reqWish) throws ParseException {
@@ -55,7 +57,10 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
             for(Wish wish:records){
                 ResWish resWish=new ResWish();
                 BeanUtils.copyProperties(wish,resWish);
-//                AccountMapper.s
+                Account account = accountMapper.selectById(resWish.getAccountId());
+                resWish.setBalance(account.getBalance());
+                resWish.setApartDays((resWish.getTotalMoney().subtract(resWish.getBalance()))
+                        .divide(resWish.getDayMoney()).setScale( 0, BigDecimal.ROUND_UP ).longValue());
                 resWishList.add(resWish);
 //                resWish.setApartDays(DateUtil.daysBetween(resWish.getAccomplishTime(),resWish.getCreateTime()));
             }
@@ -72,9 +77,14 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
 
     @Override
     public int addWish(ReqWish reqWish) {
+
         Wish wish=new Wish();
         BeanUtils.copyProperties(reqWish,wish);
         wish.setCreateTime(new Date());
-        return 0;
+        wish.setIsAvailable(1);
+        wish.setIsDeleted(0);
+        wish.setStatus("doing");
+        return wishMapper.insert(wish);
+
     }
 }

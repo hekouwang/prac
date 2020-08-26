@@ -19,28 +19,30 @@ public class CAccountServiceImpl implements CAccountService {
 
 
     @Autowired
-    AccountMapper AccountMapper;
+    AccountMapper accountMapper;
 
 
     @Override
     public int addAccount(Account account) {
+
         account.setIsAvailable(1);
 //        account.setId(LocalStringUtil.getUUID());
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
         account.setCreateTime(time);
         account.setIsDeleted(0);
-        return AccountMapper.insert(account);
+        return accountMapper.insert(account);
+
     }
 
     @Override
     public Account selAccountById(String id) {
-        return AccountMapper.selectByPrimaryKey(id);
+        return accountMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public List<Account> selAccount(CAccountDTO cAccountDTO) {
-        return AccountMapper.selCAcount(cAccountDTO);
+        return accountMapper.selCAcount(cAccountDTO);
     }
 
     @Override

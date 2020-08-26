@@ -6,6 +6,7 @@ import com.microfian.prac.entity.Account;
 import com.microfian.prac.mapper.CClassifyPOMapper;
 import com.microfian.prac.request.ReqClassify;
 import com.microfian.prac.request.ReqWish;
+import com.microfian.prac.response.Result;
 import com.microfian.prac.service.CAccountService;
 import com.microfian.prac.service.CClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class CClassifyController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return Result.success();
     }
 
     /**
@@ -66,7 +67,7 @@ public class CClassifyController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return Result.success();
     }
 
 
