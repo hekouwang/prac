@@ -1,6 +1,5 @@
 package com.microfian.prac.response;
 
-import com.microfian.prac.DTO.ClassifyChildrenVo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -20,5 +19,5 @@ public class ResClassifyVo {
 
     private String name;
 
-    private List<ClassifyChildrenVo> children;
+    private List<ResClassifyChildrenVo> children;
 }

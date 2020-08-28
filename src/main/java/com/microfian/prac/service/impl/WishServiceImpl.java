@@ -21,7 +21,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +55,7 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
         if(CollectionUtils.isEmpty(records)){
             return result;
         }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
             for(Wish wish:records){
                 ResWish resWish=new ResWish();
@@ -60,7 +63,9 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
                 Account account = accountMapper.selectById(resWish.getAccountId());
                 resWish.setBalance(account.getBalance());
                 resWish.setApartDays((resWish.getTotalMoney().subtract(resWish.getBalance()))
-                        .divide(resWish.getDayMoney()).setScale( 0, BigDecimal.ROUND_UP ).longValue());
+                        .divide(resWish.getDayMoney(),2, BigDecimal.ROUND_HALF_UP).longValue());
+                resWish.setAccomplishTime(DateUtil.getNextDate(formatter.format(new Date()),
+                        resWish.getApartDays().intValue(), Calendar.DATE,"yyyy-MM-dd"));
                 resWishList.add(resWish);
 //                resWish.setApartDays(DateUtil.daysBetween(resWish.getAccomplishTime(),resWish.getCreateTime()));
             }
@@ -79,8 +84,9 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
     public int addWish(ReqWish reqWish) {
 
         Wish wish=new Wish();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         BeanUtils.copyProperties(reqWish,wish);
-        wish.setCreateTime(new Date());
+        wish.setCreateTime(formatter.format(new Date()));
         wish.setIsAvailable(1);
         wish.setIsDeleted(0);
         wish.setStatus("doing");

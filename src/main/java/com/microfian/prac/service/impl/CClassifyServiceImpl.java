@@ -2,9 +2,8 @@ package com.microfian.prac.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.microfian.prac.DTO.CClassifyDTO;
-import com.microfian.prac.DTO.ClassifyChildrenVo;
+import com.microfian.prac.response.ResClassifyChildrenVo;
 import com.microfian.prac.request.ReqClassify;
-import com.microfian.prac.response.ResClassify;
 import com.microfian.prac.response.ResClassifyVo;
 import com.microfian.prac.entity.Classify;
 import com.microfian.prac.mapper.CClassifyPOMapper;
@@ -81,18 +80,18 @@ public class CClassifyServiceImpl  implements CClassifyService {
             classifyVo.setParentId(cClassifyPO.getParentId());
             classifyVo.setLabel(cClassifyPO.getClassifyName());
             classifyVo.setName(cClassifyPO.getClassifyName());
-            List<ClassifyChildrenVo> list1=new ArrayList<>();
+            List<ResClassifyChildrenVo> list1=new ArrayList<>();
             cClassifyDTO.setParentId(cClassifyPO.getId());
             List<Classify> cClassifyPOS1 = cClassifyPOMapper.selCClassify(cClassifyDTO);
             if(!CollectionUtils.isEmpty(cClassifyPOS1)){
                 for(Classify cClassifyPO1:cClassifyPOS1){
-                    ClassifyChildrenVo classifyChildrenVo=new ClassifyChildrenVo();
-                    classifyChildrenVo.setLabel(cClassifyPO1.getClassifyName());
-                    classifyChildrenVo.setValue(cClassifyPO1.getId());
-                    classifyChildrenVo.setId(cClassifyPO1.getId());
-                    classifyChildrenVo.setName(cClassifyPO1.getClassifyName());
-                    classifyChildrenVo.setParentId(cClassifyPO1.getParentId());
-                    list1.add(classifyChildrenVo);
+                    ResClassifyChildrenVo resClassifyChildrenVo =new ResClassifyChildrenVo();
+                    resClassifyChildrenVo.setLabel(cClassifyPO1.getClassifyName());
+                    resClassifyChildrenVo.setValue(cClassifyPO1.getId());
+                    resClassifyChildrenVo.setId(cClassifyPO1.getId());
+                    resClassifyChildrenVo.setName(cClassifyPO1.getClassifyName());
+                    resClassifyChildrenVo.setParentId(cClassifyPO1.getParentId());
+                    list1.add(resClassifyChildrenVo);
                 }
             }
             classifyVo.setChildren(list1);

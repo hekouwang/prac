@@ -1,11 +1,11 @@
-package com.microfian.prac.DTO;
+package com.microfian.prac.response;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class ClassifyChildrenVo {
+public class ResClassifyChildrenVo {
 
     private String label;
 

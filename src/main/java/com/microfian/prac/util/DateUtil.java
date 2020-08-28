@@ -71,4 +71,23 @@ public class DateUtil {
         return Integer.parseInt(String.valueOf(between_days));
     }
 
+
+
+    public static String getNextDate(String sDate, int iDate,int iCal, String sStr){
+        String sNextDate = "";
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat(sStr);
+        Date date = null;
+        try {
+            date = formatter.parse(sDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.setTime(date);
+        calendar.add(iCal, iDate);
+        sNextDate = formatter.format(calendar.getTime());
+        return sNextDate ;
+    }
+
+
 }

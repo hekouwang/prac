@@ -29,3 +29,10 @@ build/
 
 ### VS Code ###
 .vscode/
+/lib/javax.ejb.jar
+/lib/javax.resource.jar
+/lib/javax.jms.jar
+/lib/javax.persistence.jar
+/lib/javax.servlet.jsp.jar
+/lib/javax.servlet.jsp.jstl.jar
+/lib/javax.transaction.jar

@@ -33,13 +33,14 @@ public class WishController {
             e.printStackTrace();
         }
         return Result.success();
+
     }
 
     @PostMapping(value = "/addWish")
     public Object addWish(@RequestBody ReqWish reqWish) {
 
         try {
-            return wishService.addWish(reqWish);
+            wishService.addWish(reqWish);
         } catch (Exception e) {
             e.printStackTrace();
         }
