@@ -5,7 +5,10 @@ import com.microfian.prac.DTO.CConsumeItemReturnDTO;
 import com.microfian.prac.DTO.ClassifyAndConsumeReturnDTO;
 import com.microfian.prac.DTO.ResCConsumeItem;
 import com.microfian.prac.request.ReqClassify;
+import com.microfian.prac.response.ResAccount;
+import com.microfian.prac.response.ResBrokenLine;
 import com.microfian.prac.response.ResMoneyAndClassify;
+import com.microfian.prac.response.Result;
 import com.microfian.prac.service.CConsumeItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -93,6 +96,37 @@ public class CConsumeItemController {
         map.put("data", map1);
         map.put("code", 20000);
         return map;
+
+    }
+
+
+    @PostMapping(value = "/listConsumeItemBrokenLine")
+    public Object listConsumeItemBrokenLine(@RequestBody CConsumeItemDTO cConsumeItemDTO) {
+
+        Result<ResBrokenLine> result=new Result<>();
+        ResBrokenLine resBrokenLine=new ResBrokenLine();
+        result.setCode(20000);
+        result.setMsg("成功");
+        List<ResCConsumeItem> list = cConsumeItemService.listCConsumeItemBrokenLine(cConsumeItemDTO);
+        if(org.apache.commons.collections.CollectionUtils.isEmpty(list)){
+            return result;
+        }
+        List<String>  classifyList=new ArrayList<>();
+        List<BigDecimal> inList=new ArrayList<>();
+        List<BigDecimal> outList=new ArrayList<>();;
+        List<BigDecimal> balanceList=new ArrayList<>();;
+        for(ResCConsumeItem resCConsumeItem:list){
+            classifyList.add(resCConsumeItem.getDate());
+            inList.add(resCConsumeItem.getIn());
+            outList.add(resCConsumeItem.getOut());
+            balanceList.add(resCConsumeItem.getBalance());
+        }
+        resBrokenLine.setClassifyList(classifyList);
+        resBrokenLine.setInList(inList);
+        resBrokenLine.setOutList(outList);
+        resBrokenLine.setBalanceList(balanceList);
+        result.setData(resBrokenLine);
+        return result;
 
     }
 }

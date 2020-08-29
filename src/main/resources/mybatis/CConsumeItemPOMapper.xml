@@ -126,6 +126,86 @@
         order by cci.create_time desc
     </select>
 
+
+    <select id="selByConditionAsc" parameterType="com.microfian.prac.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
+
+        select
+        cci.id,
+        cci.money,
+        cci.consume_type,
+        cci.remark,
+        cci.create_time,
+        cc.classify_name,
+        cm.merchant_name,
+        cp.project_name,
+        ca.account_name source_account_name,
+        caa.account_name target_account_name,
+        cr.name relationName
+        from
+        c_consume_item cci
+        left join c_classify cc on cci.classify_id =cc.id
+        left join c_merchant cm on cci.merchant_id =cm.id
+        left join c_project cp on cci.project_id=cp.id
+        left join c_account ca on cci.source_account=ca.id
+        left join c_account caa on cci.target_account=caa.id
+        left join c_relation cr on cci. relation_id =cr.id
+        where
+        cci.is_deleted=0
+        and cci.is_available=1
+        <if test="accountList!=null and accountList.size() > 0">
+            AND (cci.source_account in
+            <foreach collection="accountList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="accountList!=null and accountList.size() > 0 ">
+            or cci.target_account in
+            <foreach collection="accountList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+            )
+        </if>
+        <if test="realClassifyList !=null">
+            AND cci.classify_id in
+            <foreach collection="realClassifyList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="merchantList!=null  and merchantList.size() > 0">
+            AND cci.merchant_id in
+            <foreach collection="merchantList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="projectList!=null and projectList.size() >0">
+            AND cci.project_id in
+            <foreach collection="projectList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="relationList!=null and relationList.size() >0">
+            AND cci.relation_id in
+            <foreach collection="relationList" item="item"
+                     index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="startTime !=null and startTime !=''">
+            AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &gt; STR_TO_DATE( #{startTime}, '%Y-%m-%d %H:%i:%s'
+            )
+        </if>
+        <if test="endTime !=null and endTime !=''">
+            AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
+        </if>
+
+        order by cci.create_time asc
+    </select>
+
     <select id="selByParentId" parameterType="com.microfian.prac.request.ReqClassify" resultMap="BaseResultMap">
      SELECT
         cci.*

@@ -21,6 +21,8 @@ public interface CConsumeItemPOMapper extends BaseMapper<ConsumeItem> {
 
     List<CConsumeItemReturnDTO> selByCondition(CConsumeItemDTO cConsumeItemDTO);
 
+    List<CConsumeItemReturnDTO> selByConditionAsc(CConsumeItemDTO cConsumeItemDTO);
+
     List<ConsumeItem> selByParentId(ReqClassify reqClassify);
 
     List<ConsumeItem> selById(ReqClassify reqClassify);

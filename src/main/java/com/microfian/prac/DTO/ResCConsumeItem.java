@@ -14,6 +14,9 @@ public class ResCConsumeItem {
 
     private BigDecimal out;
 
+
+    private BigDecimal balance;
+
     private TotalCount totalCount;
 
 

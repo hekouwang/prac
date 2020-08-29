@@ -8,6 +8,7 @@ import com.microfian.prac.mapper.CClassifyPOMapper;
 import com.microfian.prac.mapper.CConsumeItemPOMapper;
 import com.microfian.prac.request.ReqClassify;
 import com.microfian.prac.service.CConsumeItemService;
+import com.microfian.prac.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -199,5 +200,72 @@ public class CConsumeItemServiceImpl implements CConsumeItemService {
                 .collect(Collectors.toList());
         return list;
 
+    }
+
+
+    @Override
+    public List<ResCConsumeItem> listCConsumeItemBrokenLine(CConsumeItemDTO cConsumeItemDTO) {
+
+        //判断是否传了类别
+        if (!CollectionUtils.isEmpty(cConsumeItemDTO.getClassifyList())) {
+            List<Integer> list = new ArrayList<>();
+            for (List<Integer> list1 : cConsumeItemDTO.getClassifyList()) {
+                list.addAll(list1);
+            }
+            cConsumeItemDTO.setRealClassifyList(list);
+        }
+
+        //判断是否传了时间,没有的话取当前年第一天和今天
+        if (!CollectionUtils.isEmpty(cConsumeItemDTO.getStartAndEndTime())) {
+            String startTime = cConsumeItemDTO.getStartAndEndTime().get(0) + " 00:00:00";
+            String endTime = cConsumeItemDTO.getStartAndEndTime().get(1) + " 23:59:59";
+            cConsumeItemDTO.setStartTime(startTime);
+            cConsumeItemDTO.setEndTime(endTime);
+        } else {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            //获取当前年第一天：
+            String monthfirst = format.format(DateUtil.getCurrYearFirst());
+
+            //获取当前时间
+            String monthlast = format.format(new Date());
+            String startTime = monthfirst + " 00:00:00";
+            String endTime = monthlast + " 23:59:59";
+            cConsumeItemDTO.setStartTime(startTime);
+            cConsumeItemDTO.setEndTime(endTime);
+        }
+        List<CConsumeItemReturnDTO> list = cConsumeItemPOMapper.selByConditionAsc(cConsumeItemDTO);
+        List<ResCConsumeItem> resCConsumeItemList = new ArrayList<>();
+        if (CollectionUtils.isEmpty(list)) {
+            return resCConsumeItemList;
+        }
+
+        Map<String, List<CConsumeItemReturnDTO>> map = list.stream().collect(
+                Collectors.groupingBy(CConsumeItemReturnDTO::getMonth, LinkedHashMap::new, Collectors.toList()));
+
+
+        for (Map.Entry<String, List<CConsumeItemReturnDTO>> entry : map.entrySet()) {
+            ResCConsumeItem resCConsumeItem = new ResCConsumeItem();
+            resCConsumeItem.setDate(entry.getKey());
+            BigDecimal in = new BigDecimal("0");
+            BigDecimal out = new BigDecimal("0");
+            List<CConsumeItemReturnDTO> entryList = entry.getValue();
+            for (CConsumeItemReturnDTO cConsumeItemReturnDTO : entryList) {
+                if (cConsumeItemReturnDTO.getConsumeType() == 1) {
+                    out = out.add(cConsumeItemReturnDTO.getMoney());
+                } else if (cConsumeItemReturnDTO.getConsumeType() == 2) {
+                    in = in.add(cConsumeItemReturnDTO.getMoney());
+                }
+            }
+            //按提交时间降序--stream写法
+            entryList = entryList.stream().sorted(Comparator.comparing(CConsumeItemReturnDTO::getCreateTime))
+                    .collect(Collectors.toList());//根据创建时间倒排
+
+            resCConsumeItem.setIn(in);
+            resCConsumeItem.setOut(out);
+            resCConsumeItem.setBalance(in.subtract(out));
+            resCConsumeItemList.add(resCConsumeItem);
+        }
+        return resCConsumeItemList;
     }
 }

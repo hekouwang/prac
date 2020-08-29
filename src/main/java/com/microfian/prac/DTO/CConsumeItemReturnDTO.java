@@ -55,4 +55,9 @@ public class CConsumeItemReturnDTO {
         return this.createTime.substring(0,10);
     }
 
+    public String  getMonth(){
+        return this.createTime.substring(0,7);
+    }
+
+
 }

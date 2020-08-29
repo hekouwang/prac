@@ -11,5 +11,7 @@ public interface CConsumeItemService {
 
     List<ResCConsumeItem> listCConsumeItem(CConsumeItemDTO cConsumeItemDTO);
 
+    List<ResCConsumeItem> listCConsumeItemBrokenLine(CConsumeItemDTO cConsumeItemDTO);
+
     List<ClassifyAndConsumeReturnDTO> listConsumeItemGroupAndOrder(ReqClassify reqClassify);
  }
