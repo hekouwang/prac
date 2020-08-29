@@ -3,6 +3,7 @@ package com.microfian.prac.controller;
 import com.microfian.prac.DTO.CAccountDTO;
 import com.microfian.prac.entity.Account;
 import com.microfian.prac.entity.CMerchantPO;
+import com.microfian.prac.request.ReqAccount;
 import com.microfian.prac.response.Result;
 import com.microfian.prac.service.CAccountService;
 import com.microfian.prac.service.CMerchantService;
@@ -34,6 +35,40 @@ public class CAccountController {
         map.put("code",20000);
         map.put("data", cAccountService.selAccount(cAccountDTO));
         return map;
+    }
+
+    /**
+     * 分组查询账户
+     * @param cAccountDTO
+     * @return
+     */
+    @PostMapping(value = "/listAccountByGroup")
+    public Object listAccountByGroup(@RequestBody CAccountDTO cAccountDTO) {
+
+        try {
+            return cAccountService.listAccountByGroup();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.success();
+
+    }
+
+    /**
+     * 分组查询账户
+     * @param reqAccount
+     * @return
+     */
+    @PostMapping(value = "/getAccountByIdOrParentId")
+    public Object getAccountByIdOrParentId(@RequestBody ReqAccount reqAccount) {
+
+        try {
+            return cAccountService.getByIdOrParentId(reqAccount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.success();
+
     }
 
     @PostMapping(value = "/listWishAccount")
