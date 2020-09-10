@@ -3,6 +3,9 @@ package com.microfian.prac.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.microfian.prac.entity.User;
+import com.microfian.prac.entity.UserPermission;
+
+import java.util.List;
 
 /**
  * @author hekouwang
@@ -11,5 +14,7 @@ import com.microfian.prac.entity.User;
 public interface UserService extends IService<User> {
 
    User selectByName(String name);
+
+   List<UserPermission> getPermissionList(Integer adminId);
 
 }
