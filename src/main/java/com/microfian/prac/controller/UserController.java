@@ -1,9 +1,13 @@
 package com.microfian.prac.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.microfian.prac.request.UmsAdminLoginParam;
+import com.microfian.prac.response.CommonResult;
+import com.microfian.prac.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,16 +16,28 @@ import java.util.Map;
 @RequestMapping("user")
 public class UserController {
 
-    @PostMapping(value = "/login")
-    public Object addAccount(){
-        Map<String, Object> map=new HashMap<String ,Object>();
-        map.put("code",20000);
-        Map<String, String> map1=new HashMap<String,String>();
-        map1.put("token","admin-token");
-        map.put("data",map1);
-        return map;
-    }
+    @Autowired
+    private UserService userService;
 
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
+
+    @ApiOperation(value = "登录以后返回token")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam) {
+        String token = userService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
+        if (token == null) {
+            return CommonResult.validateFailed("用户名或密码错误");
+        }
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", token);
+        tokenMap.put("tokenHead", tokenHead);
+        return CommonResult.success(tokenMap);
+    }
     @GetMapping(value = "/info")
     public Object info(){
         Map<String, Object> map=new HashMap<String ,Object>();
