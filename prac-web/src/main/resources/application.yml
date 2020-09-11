@@ -1,0 +1,43 @@
+server:
+  port : 8091
+  servlet:
+    context-path : /prac
+spring:
+  datasource:
+    driver-class-name :
+      com.mysql.cj.jdbc.Driver
+    url :
+      jdbc:mysql://127.0.0.1:3306/c_fian_online?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username :
+      root
+    password :
+      root
+
+
+secure.i:
+ignored:
+urls: #安全路径白名单
+- /swagger-ui.html
+- /swagger-resources/**
+- /swagger/**
+- /**/v2/api-docs
+- /**/*.js
+- /**/*.css
+- /**/*.png
+- /**/*.ico
+- /webjars/springfox-swagger-ui/**
+- /actuator/**
+- /druid/**
+- /admin/login
+- /admin/register
+- /admin/info
+- /admin/logout
+- /minio/upload
+
+
+
+#mybatis-plus.config-locations=classpath:mybatis/mybatis-config.xml
+#mybatis-plus.mapper-locations=classpath:mybatis/*.xml
+#mybatis-plus.type-aliases-package=com.xiaocai.endorse.domain
+
+
