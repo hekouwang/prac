@@ -34,7 +34,7 @@ public class CBussinessServiceImpl implements CBussinessService {
 
     @Override
     @Transactional
-    public Object addOneExpand(CConsumeItemDTO cConsumeItemDTO, Account Account) {
+    public Object addOneExpand(CConsumeItemDTO cConsumeItemDTO, Account account) {
 
 
         //1 新增一条消费记录
@@ -45,19 +45,21 @@ public class CBussinessServiceImpl implements CBussinessService {
         cConsumeItemPOMapper.insert(consumeItem);
 
         //2 账户变动
+        CAccountItemPO cAccountItemPO = new CAccountItemPO();
+        cAccountItemPO.setRemark("前:"+account.getBalance().toString()+",");
 
-        if(Account.getAccountType()==1){
-            Account.setBalance(Account.getBalance().subtract(cConsumeItemDTO.getMoney()));
+        if(account.getAccountType()==1){
+            account.setBalance(account.getBalance().subtract(cConsumeItemDTO.getMoney()));
         }else {
-            Account.setBalance(Account.getBalance().add(cConsumeItemDTO.getMoney()));
+            account.setBalance(account.getBalance().add(cConsumeItemDTO.getMoney()));
         }
+        cAccountItemPO.setRemark(cAccountItemPO.getRemark()+"后:"+account.getBalance());
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
 //        account.setUpdateTime(time);
-        accountMapper.updateByPrimaryKey(Account);
+        accountMapper.updateByPrimaryKey(account);
 
         //3 新增一条账户变动记录
-        CAccountItemPO cAccountItemPO = new CAccountItemPO();
         cAccountItemPO.setIsAvailable(1);
         cAccountItemPO.setIsDeleted(0);
         cAccountItemPO.setType(1);
@@ -76,28 +78,33 @@ public class CBussinessServiceImpl implements CBussinessService {
     public Object tranferAccount(CConsumeItemDTO cConsumeItemDTO,Account sourceAccount,Account targetAccount) {
 
         //1 源账户扣减
+        String remark="前:"+sourceAccount.getBalance()+",";
         if(sourceAccount.getAccountType()==1){
             sourceAccount.setBalance(sourceAccount.getBalance().subtract(cConsumeItemDTO.getMoney()));
         }else {
             sourceAccount.setBalance(sourceAccount.getBalance().add(cConsumeItemDTO.getMoney()));
         }
+        remark=remark+"后:"+sourceAccount.getBalance();
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
 //        sourceAccount.setUpdateTime(new Date());
         accountMapper.updateByPrimaryKey(sourceAccount);
 
         //2 目标账户增加
+        CAccountItemPO cAccountItemPO = new CAccountItemPO();
+        String str="前:"+targetAccount.getBalance().toString()+",";
         if(targetAccount.getAccountType()==1){
             targetAccount.setBalance(targetAccount.getBalance().add(cConsumeItemDTO.getMoney()));
         }else {
             targetAccount.setBalance(targetAccount.getBalance().subtract(cConsumeItemDTO.getMoney()));
         }
+        str=str+"后:"+targetAccount.getBalance();
         String time1 = format0.format(new Date());
 //        targetAccount.setUpdateTime(new Date());
         accountMapper.updateByPrimaryKey(targetAccount);
 
         //3 源账户增加一条记录
-        CAccountItemPO cAccountItemPO = new CAccountItemPO();
+
         cAccountItemPO.setIsAvailable(1);
         cAccountItemPO.setIsDeleted(0);
         cAccountItemPO.setType(1);
@@ -106,11 +113,13 @@ public class CBussinessServiceImpl implements CBussinessService {
         cAccountItemPO.setMerchantId(cConsumeItemDTO.getMerchantId());
         cAccountItemPO.setProjectId(cConsumeItemDTO.getProjectId());
         cAccountItemPO.setAccountId(cConsumeItemDTO.getSourceAccount());
+        cAccountItemPO.setRemark(remark);
         cAccountItemPOMapper.insert(cAccountItemPO);
 
 
         //4 目标账户增加一条记录
         cAccountItemPO.setType(2);
+        cAccountItemPO.setRemark(str);
         cAccountItemPO.setAccountId(cConsumeItemDTO.getTargetAccount());
         cAccountItemPOMapper.insert(cAccountItemPO);
 
@@ -138,11 +147,13 @@ public class CBussinessServiceImpl implements CBussinessService {
         cConsumeItemPOMapper.insert(consumeItem);
 
         //2 账户变动
+        String str="前:"+sourceAccount.getBalance().toString()+",";
         if(sourceAccount.getAccountType()==1){
             sourceAccount.setBalance(sourceAccount.getBalance().add(cConsumeItemDTO.getMoney()));
         }else {
             sourceAccount.setBalance(sourceAccount.getBalance().subtract(cConsumeItemDTO.getMoney()));
         }
+        str=str+"后:"+sourceAccount.getBalance();
         SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format0.format(new Date());
 //        sourceAccount.setUpdateTime(time);
@@ -159,6 +170,7 @@ public class CBussinessServiceImpl implements CBussinessService {
         cAccountItemPO.setMerchantId(cConsumeItemDTO.getMerchantId());
         cAccountItemPO.setProjectId(cConsumeItemDTO.getProjectId());
         cAccountItemPO.setAccountId(cConsumeItemDTO.getSourceAccount());
+        cAccountItemPO.setRemark(str);
         cAccountItemPOMapper.insert(cAccountItemPO);
 
         return null;

@@ -15,6 +15,7 @@ import com.microfian.prac.web.response.Result;
 import com.microfian.prac.web.service.WishService;
 import com.microfian.prac.web.util.DateUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,13 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
         iPage.setCurrent(reqWish.getCurrent());
         iPage.setSize(reqWish.getPageSize());
         QueryWrapper<Wish> queryWrapper=new QueryWrapper<>();
-        IPage<Wish> page = page(iPage, queryWrapper);
+        if(StringUtils.isNotEmpty(reqWish.getStatus())){
+            queryWrapper.eq("status",reqWish.getStatus());
+        }
+        if(StringUtils.isNotEmpty(reqWish.getName())){
+            queryWrapper.like("name",reqWish.getName());
+        }
+        IPage<Wish> page = wishMapper.selectPage(iPage, queryWrapper);
         List<Wish> records = page.getRecords();
         List<ResWish> resWishList=new ArrayList<>();
         if(CollectionUtils.isEmpty(records)){
@@ -93,6 +100,15 @@ public class WishServiceImpl extends ServiceImpl<WishMapper, Wish> implements Wi
         wish.setIsDeleted(0);
         wish.setStatus("doing");
         return wishMapper.insert(wish);
+
+    }
+
+    @Override
+    public int updateWish(ReqWish reqWish) {
+
+        Wish wish=new Wish();
+        BeanUtils.copyProperties(reqWish,wish);
+        return wishMapper.updateById(wish);
 
     }
 }

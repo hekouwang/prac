@@ -36,6 +36,23 @@ public class CAccountController {
     }
 
     /**
+     * 分组查询账户(新增时用到)
+     * @param cAccountDTO
+     * @return
+     */
+    @PostMapping(value = "/listAccountByGroupSelect")
+    public Object listAccountByGroupSelect(@RequestBody CAccountDTO cAccountDTO) {
+
+        try {
+            return cAccountService.listAccountByGroupSelect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.success();
+
+    }
+
+    /**
      * 分组查询账户
      * @param cAccountDTO
      * @return

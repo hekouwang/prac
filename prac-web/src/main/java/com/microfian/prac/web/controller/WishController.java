@@ -2,6 +2,7 @@ package com.microfian.prac.web.controller;
 
 
 
+import com.microfian.parc.common.api.CommonResult;
 import com.microfian.prac.web.request.ReqWish;
 import com.microfian.prac.web.response.Result;
 import com.microfian.prac.web.service.WishService;
@@ -46,5 +47,16 @@ public class WishController {
             e.printStackTrace();
         }
         return Result.success();
+    }
+
+    @PostMapping(value = "/updateWish")
+    public Object updateWish(@RequestBody ReqWish reqWish) {
+
+        try {
+            wishService.updateWish(reqWish);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return CommonResult.success(null);
     }
 }

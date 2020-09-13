@@ -26,5 +26,8 @@ public interface WishService extends IService<Wish> {
     int  addWish(ReqWish reqWish) ;
 
 
+    int  updateWish(ReqWish reqWish) ;
+
+
 
 }

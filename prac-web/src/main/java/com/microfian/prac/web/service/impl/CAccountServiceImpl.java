@@ -1,6 +1,7 @@
 package com.microfian.prac.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.microfian.parc.common.api.CommonResult;
 import com.microfian.prac.web.DTO.CAccountDTO;
 import com.microfian.prac.web.entity.Account;
 import com.microfian.prac.web.entity.Classify;
@@ -95,6 +96,7 @@ public class CAccountServiceImpl implements CAccountService {
         List<ResAccountVo> list=new ArrayList<>();
         QueryWrapper<Account> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("parent_account_id",0);
+        queryWrapper.eq("is_deleted",0);
         List<Account> accountList = accountMapper.selectList(queryWrapper);
         if(org.apache.commons.collections.CollectionUtils.isEmpty(accountList)){
             return result;
@@ -110,6 +112,7 @@ public class CAccountServiceImpl implements CAccountService {
             List<ResAccountChildrenVo> list1=new ArrayList<>();
             QueryWrapper<Account> queryWrapper1=new QueryWrapper<>();
             queryWrapper1.eq("parent_account_id",accountVo.getId());
+            queryWrapper.eq("is_deleted",0);
             List<Account> childrenAccountList = accountMapper.selectList(queryWrapper1);
             if(!CollectionUtils.isEmpty(childrenAccountList)){
                 for(Account accountChildren:childrenAccountList){
@@ -132,6 +135,53 @@ public class CAccountServiceImpl implements CAccountService {
         result.setCode(20000);
         result.setMsg("成功");
         return result;
+
+    }
+
+    @Override
+    public CommonResult<List<ResAccountVo>> listAccountByGroupSelect() {
+
+        List<ResAccountVo> list=new ArrayList<>();
+        QueryWrapper<Account> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("parent_account_id",0);
+        queryWrapper.eq("is_deleted",0);
+        queryWrapper.eq("is_available",1);
+        List<Account> accountList = accountMapper.selectList(queryWrapper);
+        if(org.apache.commons.collections.CollectionUtils.isEmpty(accountList)){
+            return CommonResult.success(null);
+        }
+        for(Account account:accountList){
+            ResAccountVo accountVo=new ResAccountVo();
+            BigDecimal totalBalance=new BigDecimal(0);
+            accountVo.setValue(account.getId());
+            accountVo.setId(account.getId());
+            accountVo.setParentId(account.getParentAccountId());
+            accountVo.setLabel(account.getAccountName());
+            accountVo.setName(account.getAccountName());
+            List<ResAccountChildrenVo> list1=new ArrayList<>();
+            QueryWrapper<Account> queryWrapper1=new QueryWrapper<>();
+            queryWrapper1.eq("parent_account_id",accountVo.getId());
+            queryWrapper1.eq("is_deleted",0);
+            queryWrapper1.eq("is_available",1);
+            List<Account> childrenAccountList = accountMapper.selectList(queryWrapper1);
+            if(!CollectionUtils.isEmpty(childrenAccountList)){
+                for(Account accountChildren:childrenAccountList){
+                    ResAccountChildrenVo resAccountChildrenVo =new ResAccountChildrenVo();
+                    resAccountChildrenVo.setLabel(accountChildren.getAccountName());
+                    resAccountChildrenVo.setValue(accountChildren.getId());
+                    resAccountChildrenVo.setId(accountChildren.getId());
+                    resAccountChildrenVo.setName(accountChildren.getAccountName());
+                    resAccountChildrenVo.setParentId(accountChildren.getParentAccountId());
+                    totalBalance= totalBalance.add(accountChildren.getBalance());
+                    list1.add(resAccountChildrenVo);
+                }
+            }
+            accountVo.setTotalBalance(totalBalance);
+            accountVo.setChildren(list1);
+
+            list.add(accountVo);
+        }
+        return CommonResult.success(list);
 
     }
 

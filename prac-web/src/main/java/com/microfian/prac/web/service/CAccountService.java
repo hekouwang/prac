@@ -1,6 +1,7 @@
 package com.microfian.prac.web.service;
 
 
+import com.microfian.parc.common.api.CommonResult;
 import com.microfian.prac.web.DTO.CAccountDTO;
 import com.microfian.prac.web.entity.Account;
 import com.microfian.prac.web.request.ReqAccount;
@@ -24,6 +25,8 @@ public interface CAccountService {
     Result listWishAccount();
 
     Result listAccountByGroup();
+
+    CommonResult listAccountByGroupSelect();
 
     Result<List<ResAccount>> getByIdOrParentId(ReqAccount reqAccount);
 

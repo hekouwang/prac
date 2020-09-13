@@ -34,14 +34,14 @@ public class CBusinessController {
             return null;
         }
 
-        Account Account = checkAccount(cConsumeItemDTO.getSourceAccount());
+        Account account = checkAccount(cConsumeItemDTO.getSourceAccount());
 
-        if(null ==Account){
+        if(null ==account){
             return null;
         }
         Map map = new HashMap<>();
         map.put("code",20000);
-        map.put("data", cBussinessService.addOneExpand(cConsumeItemDTO,Account));
+        map.put("data", cBussinessService.addOneExpand(cConsumeItemDTO,account));
         return map;
 
     }
@@ -56,15 +56,15 @@ public class CBusinessController {
             return null;
         }
 
-        Account Account = checkAccount(cConsumeItemDTO.getSourceAccount());
-        Account Account1 = checkAccount(cConsumeItemDTO.getTargetAccount());
+        Account account = checkAccount(cConsumeItemDTO.getSourceAccount());
+        Account account1 = checkAccount(cConsumeItemDTO.getTargetAccount());
 
-        if(null ==Account){
+        if(null ==account){
             return null;
         }
         Map map = new HashMap<>();
         map.put("code",20000);
-        map.put("data", cBussinessService.tranferAccount(cConsumeItemDTO,Account,Account1));
+        map.put("data", cBussinessService.tranferAccount(cConsumeItemDTO,account,account1));
         return map;
 
     }
@@ -79,14 +79,14 @@ public class CBusinessController {
             return null;
         }
 
-        Account Account = checkAccount(cConsumeItemDTO.getSourceAccount());
+        Account account = checkAccount(cConsumeItemDTO.getSourceAccount());
 
-        if(null ==Account){
+        if(null ==account){
             return null;
         }
         Map map = new HashMap<>();
         map.put("code",20000);
-        map.put("data", cBussinessService.addOneIncome(cConsumeItemDTO,Account));
+        map.put("data", cBussinessService.addOneIncome(cConsumeItemDTO,account));
         return map;
 
     }
