@@ -1,4 +1,4 @@
-package com.microfian.prac.web.response;
+package com.microFian.prac.web.response;
 
 public class ResultUtil {
 

@@ -1,4 +1,4 @@
-package com.microfian.prac.web.DTO;
+package com.microFian.prac.web.DTO;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

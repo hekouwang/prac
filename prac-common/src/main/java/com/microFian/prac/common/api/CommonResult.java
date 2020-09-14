@@ -1,4 +1,4 @@
-package com.microfian.parc.common.api;
+package com.microFian.prac.common.api;
 
 /**
  * 通用返回对象

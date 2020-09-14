@@ -1,7 +1,7 @@
-package com.microfian.prac.web.controller;
+package com.microFian.prac.web.controller;
 
-import com.microfian.prac.web.entity.CProjectPO;
-import com.microfian.prac.web.service.CProjectService;
+import com.microFian.prac.web.entity.CProjectPO;
+import com.microFian.prac.web.service.CProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

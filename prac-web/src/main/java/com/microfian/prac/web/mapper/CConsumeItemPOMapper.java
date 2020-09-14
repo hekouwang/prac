@@ -1,11 +1,11 @@
-package com.microfian.prac.web.mapper;
+package com.microFian.prac.web.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.microfian.prac.web.DTO.CConsumeItemDTO;
-import com.microfian.prac.web.DTO.CConsumeItemReturnDTO;
-import com.microfian.prac.web.entity.ConsumeItem;
-import com.microfian.prac.web.request.ReqClassify;
+import com.microFian.prac.web.DTO.CConsumeItemDTO;
+import com.microFian.prac.web.DTO.CConsumeItemReturnDTO;
+import com.microFian.prac.web.entity.ConsumeItem;
+import com.microFian.prac.web.request.ReqClassify;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

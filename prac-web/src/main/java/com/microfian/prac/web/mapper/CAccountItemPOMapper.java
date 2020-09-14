@@ -1,7 +1,7 @@
-package com.microfian.prac.web.mapper;
+package com.microFian.prac.web.mapper;
 
 
-import com.microfian.prac.web.entity.CAccountItemPO;
+import com.microFian.prac.web.entity.CAccountItemPO;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,6 +1,6 @@
-package com.microfian.prac.web.mapper;
+package com.microFian.prac.web.mapper;
 
-import com.microfian.prac.web.entity.CRelationPO;
+import com.microFian.prac.web.entity.CRelationPO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

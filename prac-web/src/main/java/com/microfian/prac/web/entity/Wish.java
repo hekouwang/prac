@@ -1,4 +1,4 @@
-package com.microfian.prac.web.entity;
+package com.microFian.prac.web.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;

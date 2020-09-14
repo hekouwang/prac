@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.microfian.prac.web.mapper.CRelationPOMapper">
+<mapper namespace="com.microFian.prac.web.mapper.CRelationPOMapper">
 
-  <resultMap id="BaseResultMap" type="com.microfian.prac.web.entity.CRelationPO">
+  <resultMap id="BaseResultMap" type="com.microFian.prac.web.entity.CRelationPO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
@@ -24,7 +24,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByUserId" parameterType="com.microfian.prac.web.entity.CRelationPO" resultMap="BaseResultMap">
+  <select id="selectByUserId" parameterType="com.microFian.prac.web.entity.CRelationPO" resultMap="BaseResultMap">
     select
         <include refid="Base_Column_List" />
     from
@@ -40,7 +40,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.microfian.prac.web.entity.CRelationPO">
+  <insert id="insert" parameterType="com.microFian.prac.web.entity.CRelationPO">
     insert into c_relation (id, name, create_time, 
       update_time, is_available, is_deleted, 
       user_id)
@@ -49,7 +49,7 @@
       #{userId,jdbcType=INTEGER})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.microfian.prac.web.entity.CRelationPO">
+  <insert id="insertSelective" parameterType="com.microFian.prac.web.entity.CRelationPO">
     insert into c_relation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -99,7 +99,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.web.entity.CRelationPO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.microFian.prac.web.entity.CRelationPO">
     update c_relation
     <set>
       <if test="name != null">
@@ -124,7 +124,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.web.entity.CRelationPO">
+  <update id="updateByPrimaryKey" parameterType="com.microFian.prac.web.entity.CRelationPO">
     update c_relation
     set name = #{name,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},

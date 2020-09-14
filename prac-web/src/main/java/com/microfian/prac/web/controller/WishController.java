@@ -1,11 +1,11 @@
-package com.microfian.prac.web.controller;
+package com.microFian.prac.web.controller;
 
 
 
-import com.microfian.parc.common.api.CommonResult;
-import com.microfian.prac.web.request.ReqWish;
-import com.microfian.prac.web.response.Result;
-import com.microfian.prac.web.service.WishService;
+import com.microFian.prac.common.api.CommonResult;
+import com.microFian.prac.web.request.ReqWish;
+import com.microFian.prac.web.response.Result;
+import com.microFian.prac.web.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

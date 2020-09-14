@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.microfian.prac.web.mapper.CClassifyPOMapper">
+<mapper namespace="com.microFian.prac.web.mapper.CClassifyPOMapper">
 
-  <resultMap id="BaseResultMap" type="com.microfian.prac.web.entity.Classify">
+  <resultMap id="BaseResultMap" type="com.microFian.prac.web.entity.Classify">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="classify_name" jdbcType="VARCHAR" property="classifyName" />
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
@@ -27,7 +27,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selCClassify" parameterType="com.microfian.prac.web.DTO.CClassifyDTO" resultMap="BaseResultMap">
+  <select id="selCClassify" parameterType="com.microFian.prac.web.DTO.CClassifyDTO" resultMap="BaseResultMap">
     select
         <include refid="Base_Column_List" />
     from
@@ -48,7 +48,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.microfian.prac.web.entity.Classify">
+  <insert id="insert" parameterType="com.microFian.prac.web.entity.Classify">
     insert into c_classify (id, classify_name, parent_id, 
       create_time, update_time, is_available, 
       is_deleted, classify_order)
@@ -57,7 +57,7 @@
       #{isDeleted,jdbcType=INTEGER}, #{classifyOrder,jdbcType=INTEGER})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.microfian.prac.web.entity.Classify">
+  <insert id="insertSelective" parameterType="com.microFian.prac.web.entity.Classify">
     insert into c_classify
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -113,7 +113,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.web.entity.Classify">
+  <update id="updateByPrimaryKeySelective" parameterType="com.microFian.prac.web.entity.Classify">
     update c_classify
     <set>
       <if test="classifyName != null">
@@ -141,7 +141,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.web.entity.Classify">
+  <update id="updateByPrimaryKey" parameterType="com.microFian.prac.web.entity.Classify">
     update c_classify
     set classify_name = #{classifyName,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=VARCHAR},

@@ -1,4 +1,4 @@
-package com.microfian.prac.web.response;
+package com.microFian.prac.web.response;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

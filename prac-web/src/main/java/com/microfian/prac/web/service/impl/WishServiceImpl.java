@@ -1,19 +1,19 @@
-package com.microfian.prac.web.service.impl;
+package com.microFian.prac.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.microfian.prac.web.entity.Account;
-import com.microfian.prac.web.entity.Wish;
-import com.microfian.prac.web.mapper.AccountMapper;
-import com.microfian.prac.web.mapper.WishMapper;
-import com.microfian.prac.web.request.ReqWish;
-import com.microfian.prac.web.response.ResWish;
-import com.microfian.prac.web.response.Result;
-import com.microfian.prac.web.service.WishService;
-import com.microfian.prac.web.util.DateUtil;
+import com.microFian.prac.web.entity.Account;
+import com.microFian.prac.web.entity.Wish;
+import com.microFian.prac.web.mapper.AccountMapper;
+import com.microFian.prac.web.mapper.WishMapper;
+import com.microFian.prac.web.request.ReqWish;
+import com.microFian.prac.web.response.ResWish;
+import com.microFian.prac.web.response.Result;
+import com.microFian.prac.web.service.WishService;
+import com.microFian.prac.web.util.DateUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

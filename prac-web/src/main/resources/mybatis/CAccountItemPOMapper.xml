@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.microfian.prac.web.mapper.CAccountItemPOMapper">
-  <resultMap id="BaseResultMap" type="com.microfian.prac.web.entity.CAccountItemPO">
+<mapper namespace="com.microFian.prac.web.mapper.CAccountItemPOMapper">
+  <resultMap id="BaseResultMap" type="com.microFian.prac.web.entity.CAccountItemPO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="money" jdbcType="DECIMAL" property="money" />
     <result column="type" jdbcType="INTEGER" property="type" />
@@ -30,7 +30,7 @@
     delete from c_account_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.microfian.prac.web.entity.CAccountItemPO">
+  <insert id="insert" parameterType="com.microFian.prac.web.entity.CAccountItemPO">
     insert into c_account_item (money, type,
       account_id, remark, target_account_id, 
       merchant_id, classify_id, project_id, 
@@ -42,7 +42,7 @@
       #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{isAvailable,jdbcType=INTEGER}, 
       #{isDeleted,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.microfian.prac.web.entity.CAccountItemPO">
+  <insert id="insertSelective" parameterType="com.microFian.prac.web.entity.CAccountItemPO">
     insert into c_account_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="money != null">
@@ -121,7 +121,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.web.entity.CAccountItemPO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.microFian.prac.web.entity.CAccountItemPO">
     update c_account_item
     <set>
       <if test="money != null">
@@ -163,7 +163,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.web.entity.CAccountItemPO">
+  <update id="updateByPrimaryKey" parameterType="com.microFian.prac.web.entity.CAccountItemPO">
     update c_account_item
     set money = #{money,jdbcType=DECIMAL},
       type = #{type,jdbcType=INTEGER},

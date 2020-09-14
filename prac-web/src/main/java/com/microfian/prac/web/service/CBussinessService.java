@@ -1,7 +1,7 @@
-package com.microfian.prac.web.service;
+package com.microFian.prac.web.service;
 
-import com.microfian.prac.web.DTO.CConsumeItemDTO;
-import com.microfian.prac.web.entity.Account;
+import com.microFian.prac.web.DTO.CConsumeItemDTO;
+import com.microFian.prac.web.entity.Account;
 
 public interface CBussinessService {
 

@@ -1,7 +1,7 @@
-package com.microfian.prac.web.service;
+package com.microFian.prac.web.service;
 
 
-import com.microfian.prac.web.entity.CMerchantPO;
+import com.microFian.prac.web.entity.CMerchantPO;
 
 import java.util.List;
 

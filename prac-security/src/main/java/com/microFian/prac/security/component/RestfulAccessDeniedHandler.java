@@ -1,7 +1,7 @@
 package com.microFian.prac.security.component;
 
 import cn.hutool.json.JSONUtil;
-import com.microfian.parc.common.api.CommonResult;
+import com.microFian.prac.common.api.CommonResult;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 

@@ -1,4 +1,4 @@
-package com.microfian.parc.common.service;
+package com.microFian.prac.common.service;
 
 import java.util.List;
 import java.util.Map;

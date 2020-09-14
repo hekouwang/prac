@@ -1,4 +1,4 @@
-package com.microfian.parc.common.api;
+package com.microFian.prac.common.api;
 
 /**
  * 枚举了一些常用API操作码

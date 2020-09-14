@@ -1,4 +1,4 @@
-package com.microfian.parc.common;
+package com.microFian.prac.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

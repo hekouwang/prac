@@ -1,10 +1,10 @@
-package com.microfian.prac.web.controller;
+package com.microFian.prac.web.controller;
 
 
-import com.microfian.prac.web.DTO.CClassifyDTO;
-import com.microfian.prac.web.request.ReqClassify;
-import com.microfian.prac.web.response.Result;
-import com.microfian.prac.web.service.CClassifyService;
+import com.microFian.prac.web.DTO.CClassifyDTO;
+import com.microFian.prac.web.request.ReqClassify;
+import com.microFian.prac.web.response.Result;
+import com.microFian.prac.web.service.CClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

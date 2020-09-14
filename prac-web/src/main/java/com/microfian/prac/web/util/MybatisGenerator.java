@@ -1,4 +1,4 @@
- package com.microfian.prac.web.util;
+ package com.microFian.prac.web.util;
 
 
  import com.baomidou.mybatisplus.generator.AutoGenerator;

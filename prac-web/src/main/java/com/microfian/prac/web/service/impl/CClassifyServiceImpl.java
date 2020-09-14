@@ -1,15 +1,15 @@
-package com.microfian.prac.web.service.impl;
+package com.microFian.prac.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.microfian.prac.web.DTO.CClassifyDTO;
-import com.microfian.prac.web.entity.Classify;
-import com.microfian.prac.web.mapper.CClassifyPOMapper;
-import com.microfian.prac.web.request.ReqClassify;
-import com.microfian.prac.web.response.ResClassifyChildrenVo;
-import com.microfian.prac.web.response.ResClassifyVo;
-import com.microfian.prac.web.response.Result;
-import com.microfian.prac.web.response.ResultEnum;
-import com.microfian.prac.web.service.CClassifyService;
+import com.microFian.prac.web.DTO.CClassifyDTO;
+import com.microFian.prac.web.entity.Classify;
+import com.microFian.prac.web.mapper.CClassifyPOMapper;
+import com.microFian.prac.web.request.ReqClassify;
+import com.microFian.prac.web.response.ResClassifyChildrenVo;
+import com.microFian.prac.web.response.ResClassifyVo;
+import com.microFian.prac.web.response.Result;
+import com.microFian.prac.web.response.ResultEnum;
+import com.microFian.prac.web.service.CClassifyService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

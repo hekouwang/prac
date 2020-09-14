@@ -1,11 +1,11 @@
-package com.microfian.prac.web.service;
+package com.microFian.prac.web.service;
 
 
-import com.microfian.prac.web.DTO.CClassifyDTO;
-import com.microfian.prac.web.entity.Classify;
-import com.microfian.prac.web.request.ReqClassify;
-import com.microfian.prac.web.response.ResClassifyVo;
-import com.microfian.prac.web.response.Result;
+import com.microFian.prac.web.DTO.CClassifyDTO;
+import com.microFian.prac.web.entity.Classify;
+import com.microFian.prac.web.request.ReqClassify;
+import com.microFian.prac.web.response.ResClassifyVo;
+import com.microFian.prac.web.response.Result;
 
 import java.util.List;
 

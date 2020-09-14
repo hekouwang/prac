@@ -1,4 +1,4 @@
-package com.microfian.prac.web.response;
+package com.microFian.prac.web.response;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

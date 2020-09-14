@@ -1,4 +1,4 @@
-package com.microfian.prac.web.entity;
+package com.microFian.prac.web.entity;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.microfian.prac.web.config;
+package com.microFian.prac.web.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@MapperScan("com.microfian.prac.web.mapper")
+@MapperScan("com.microFian.prac.web.mapper")
 public class MybatisPlusConfig {
 
     @Bean

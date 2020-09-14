@@ -1,7 +1,7 @@
 package com.microFian.prac.security.component;
 
 import cn.hutool.json.JSONUtil;
-import com.microfian.parc.common.api.CommonResult;
+import com.microFian.prac.common.api.CommonResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

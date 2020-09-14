@@ -1,14 +1,14 @@
-package com.microfian.prac.web.controller;
+package com.microFian.prac.web.controller;
 
 
-import com.microfian.prac.web.DTO.CConsumeItemDTO;
-import com.microfian.prac.web.DTO.ClassifyAndConsumeReturnDTO;
-import com.microfian.prac.web.DTO.ResCConsumeItem;
-import com.microfian.prac.web.request.ReqClassify;
-import com.microfian.prac.web.response.ResBrokenLine;
-import com.microfian.prac.web.response.ResMoneyAndClassify;
-import com.microfian.prac.web.response.Result;
-import com.microfian.prac.web.service.CConsumeItemService;
+import com.microFian.prac.web.DTO.CConsumeItemDTO;
+import com.microFian.prac.web.DTO.ClassifyAndConsumeReturnDTO;
+import com.microFian.prac.web.DTO.ResCConsumeItem;
+import com.microFian.prac.web.request.ReqClassify;
+import com.microFian.prac.web.response.ResBrokenLine;
+import com.microFian.prac.web.response.ResMoneyAndClassify;
+import com.microFian.prac.web.response.Result;
+import com.microFian.prac.web.service.CConsumeItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;

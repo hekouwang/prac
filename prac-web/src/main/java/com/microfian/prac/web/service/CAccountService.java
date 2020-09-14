@@ -1,12 +1,12 @@
-package com.microfian.prac.web.service;
+package com.microFian.prac.web.service;
 
 
-import com.microfian.parc.common.api.CommonResult;
-import com.microfian.prac.web.DTO.CAccountDTO;
-import com.microfian.prac.web.entity.Account;
-import com.microfian.prac.web.request.ReqAccount;
-import com.microfian.prac.web.response.ResAccount;
-import com.microfian.prac.web.response.Result;
+import com.microFian.prac.common.api.CommonResult;
+import com.microFian.prac.web.DTO.CAccountDTO;
+import com.microFian.prac.web.entity.Account;
+import com.microFian.prac.web.request.ReqAccount;
+import com.microFian.prac.web.response.ResAccount;
+import com.microFian.prac.web.response.Result;
 
 import java.util.List;
 

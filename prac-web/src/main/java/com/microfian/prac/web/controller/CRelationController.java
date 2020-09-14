@@ -1,8 +1,8 @@
-package com.microfian.prac.web.controller;
+package com.microFian.prac.web.controller;
 
 
-import com.microfian.prac.web.entity.CRelationPO;
-import com.microfian.prac.web.service.CRelationService;
+import com.microFian.prac.web.entity.CRelationPO;
+import com.microFian.prac.web.service.CRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

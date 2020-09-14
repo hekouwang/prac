@@ -1,6 +1,6 @@
-package com.microfian.parc.common.service.impl;
+package com.microFian.prac.common.service.impl;
 
-import com.microfian.parc.common.service.RedisService;
+import com.microFian.prac.common.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 

@@ -1,6 +1,6 @@
 package com.microFian.prac.security.config;
 
-import com.microfian.parc.common.config.BaseRedisConfig;
+import com.microFian.prac.common.config.BaseRedisConfig;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 

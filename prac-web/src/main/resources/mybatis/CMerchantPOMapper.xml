@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.microfian.prac.web.mapper.CMerchantPOMapper">
-  <resultMap id="BaseResultMap" type="com.microfian.prac.web.entity.CMerchantPO">
+<mapper namespace="com.microFian.prac.web.mapper.CMerchantPOMapper">
+  <resultMap id="BaseResultMap" type="com.microFian.prac.web.entity.CMerchantPO">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
@@ -22,7 +22,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectMerchant" parameterType="com.microfian.prac.web.entity.CMerchantPO" resultMap="BaseResultMap">
+  <select id="selectMerchant" parameterType="com.microFian.prac.web.entity.CMerchantPO" resultMap="BaseResultMap">
     select
         <include refid="Base_Column_List" />
     from
@@ -37,7 +37,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.microfian.prac.web.entity.CMerchantPO">
+  <insert id="insert" parameterType="com.microFian.prac.web.entity.CMerchantPO">
     insert into c_merchant (merchant_name, create_time,
       update_time, is_available, is_deleted, 
       user_id)
@@ -46,7 +46,7 @@
       #{userId,jdbcType=VARCHAR})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.microfian.prac.web.entity.CMerchantPO">
+  <insert id="insertSelective" parameterType="com.microFian.prac.web.entity.CMerchantPO">
     insert into c_merchant
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="merchantName != null">
@@ -90,7 +90,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.web.entity.CMerchantPO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.microFian.prac.web.entity.CMerchantPO">
     update c_merchant
     <set>
       <if test="merchantName != null">
@@ -115,7 +115,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.web.entity.CMerchantPO">
+  <update id="updateByPrimaryKey" parameterType="com.microFian.prac.web.entity.CMerchantPO">
     update c_merchant
     set merchant_name = #{merchantName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},

@@ -1,9 +1,9 @@
-package com.microfian.prac.web.service.impl;
+package com.microFian.prac.web.service.impl;
 
 
-import com.microfian.prac.web.entity.CMerchantPO;
-import com.microfian.prac.web.mapper.CMerchantPOMapper;
-import com.microfian.prac.web.service.CMerchantService;
+import com.microFian.prac.web.entity.CMerchantPO;
+import com.microFian.prac.web.mapper.CMerchantPOMapper;
+import com.microFian.prac.web.service.CMerchantService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

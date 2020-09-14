@@ -1,4 +1,4 @@
-package com.microfian.prac.web.util;
+package com.microFian.prac.web.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

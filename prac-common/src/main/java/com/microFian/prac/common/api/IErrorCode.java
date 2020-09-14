@@ -1,4 +1,4 @@
-package com.microfian.parc.common.api;
+package com.microFian.prac.common.api;
 
 /**
  * 封装API的错误码

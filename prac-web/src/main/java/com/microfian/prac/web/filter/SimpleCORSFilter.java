@@ -1,4 +1,4 @@
-package com.microfian.prac.web.filter;
+package com.microFian.prac.web.filter;
 
 import org.springframework.stereotype.Component;
 

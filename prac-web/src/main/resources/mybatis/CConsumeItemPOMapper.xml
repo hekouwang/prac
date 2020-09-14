@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.microfian.prac.web.mapper.CConsumeItemPOMapper">
+<mapper namespace="com.microFian.prac.web.mapper.CConsumeItemPOMapper">
 
-    <resultMap id="BaseResultMap" type="com.microfian.prac.web.entity.ConsumeItem">
+    <resultMap id="BaseResultMap" type="com.microFian.prac.web.entity.ConsumeItem">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="money" jdbcType="DECIMAL" property="money"/>
         <result column="consume_type" jdbcType="INTEGER" property="consumeType"/>
@@ -21,7 +21,7 @@
         <result column="account_book_id" jdbcType="VARCHAR" property="accountBookId"/>
     </resultMap>
 
-    <resultMap id="BaseResultMap1" type="com.microfian.prac.web.DTO.CConsumeItemReturnDTO">
+    <resultMap id="BaseResultMap1" type="com.microFian.prac.web.DTO.CConsumeItemReturnDTO">
         <id column="money" jdbcType="DECIMAL" property="money"/>
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="consume_type" jdbcType="INTEGER" property="consumeType"/>
@@ -47,7 +47,7 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
-    <select id="selByCondition" parameterType="com.microfian.prac.web.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
+    <select id="selByCondition" parameterType="com.microFian.prac.web.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
 
         select
         cci.id,
@@ -127,7 +127,7 @@
     </select>
 
 
-    <select id="selByConditionAsc" parameterType="com.microfian.prac.web.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
+    <select id="selByConditionAsc" parameterType="com.microFian.prac.web.DTO.CConsumeItemDTO" resultMap="BaseResultMap1">
 
         select
         cci.id,
@@ -206,7 +206,7 @@
         order by cci.create_time asc
     </select>
 
-    <select id="selByParentId" parameterType="com.microfian.prac.web.request.ReqClassify" resultMap="BaseResultMap">
+    <select id="selByParentId" parameterType="com.microFian.prac.web.request.ReqClassify" resultMap="BaseResultMap">
      SELECT
         cci.*
      FROM
@@ -219,7 +219,7 @@
       AND STR_TO_DATE( cci.create_time, '%Y-%m-%d %H:%i:%s' ) &lt; STR_TO_DATE( #{endTime}, '%Y-%m-%d %H:%i:%s' )
   </select>
 
-    <select id="selById" parameterType="com.microfian.prac.web.request.ReqClassify" resultMap="BaseResultMap">
+    <select id="selById" parameterType="com.microFian.prac.web.request.ReqClassify" resultMap="BaseResultMap">
      SELECT
         cci.*
      FROM
@@ -237,7 +237,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-    <insert id="insert" parameterType="com.microfian.prac.web.entity.ConsumeItem">
+    <insert id="insert" parameterType="com.microFian.prac.web.entity.ConsumeItem">
     insert into c_consume_item (money, consume_type,
       classify_id, source_account, target_account, 
       merchant_id, project_id, remark, 
@@ -252,7 +252,7 @@
       #{accountBookId,jdbcType=VARCHAR})
   </insert>
 
-    <insert id="insertSelective" parameterType="com.microfian.prac.web.entity.ConsumeItem">
+    <insert id="insertSelective" parameterType="com.microFian.prac.web.entity.ConsumeItem">
         insert into c_consume_item
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="money != null">
@@ -349,7 +349,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.web.entity.ConsumeItem">
+    <update id="updateByPrimaryKeySelective" parameterType="com.microFian.prac.web.entity.ConsumeItem">
         update c_consume_item
         <set>
             <if test="money != null">
@@ -400,7 +400,7 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.microfian.prac.web.entity.ConsumeItem">
+    <update id="updateByPrimaryKey" parameterType="com.microFian.prac.web.entity.ConsumeItem">
     update c_consume_item
     set money = #{money,jdbcType=DECIMAL},
       consume_type = #{consumeType,jdbcType=INTEGER},

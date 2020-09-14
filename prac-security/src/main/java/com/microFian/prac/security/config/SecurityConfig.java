@@ -1,6 +1,6 @@
 package com.microFian.prac.security.config;
 
-import com.macro.mall.security.util.JwtTokenUtil;
+import com.microFian.prac.security.util.JwtTokenUtil;
 import com.microFian.prac.security.component.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

@@ -1,9 +1,9 @@
-package com.microfian.prac.web.mapper;
+package com.microFian.prac.web.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.microfian.prac.web.DTO.CAccountDTO;
-import com.microfian.prac.web.entity.Account;
+import com.microFian.prac.web.DTO.CAccountDTO;
+import com.microFian.prac.web.entity.Account;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

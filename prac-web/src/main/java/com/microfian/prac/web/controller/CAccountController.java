@@ -1,10 +1,10 @@
-package com.microfian.prac.web.controller;
+package com.microFian.prac.web.controller;
 
-import com.microfian.prac.web.DTO.CAccountDTO;
-import com.microfian.prac.web.entity.Account;
-import com.microfian.prac.web.request.ReqAccount;
-import com.microfian.prac.web.response.Result;
-import com.microfian.prac.web.service.CAccountService;
+import com.microFian.prac.web.DTO.CAccountDTO;
+import com.microFian.prac.web.entity.Account;
+import com.microFian.prac.web.request.ReqAccount;
+import com.microFian.prac.web.response.Result;
+import com.microFian.prac.web.service.CAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

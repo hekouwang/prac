@@ -1,11 +1,11 @@
-package com.microfian.parc.common.config;
+package com.microFian.prac.common.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
-import com.microfian.parc.common.service.RedisService;
-import com.microfian.parc.common.service.impl.RedisServiceImpl;
+import com.microFian.prac.common.service.RedisService;
+import com.microFian.prac.common.service.impl.RedisServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;

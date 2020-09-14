@@ -1,4 +1,4 @@
-package com.microfian.prac.web;
+package com.microFian.prac.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

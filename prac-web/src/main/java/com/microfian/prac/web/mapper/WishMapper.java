@@ -1,8 +1,8 @@
-package com.microfian.prac.web.mapper;
+package com.microFian.prac.web.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.microfian.prac.web.entity.Wish;
+import com.microFian.prac.web.entity.Wish;
 import org.springframework.stereotype.Component;
 
 /**

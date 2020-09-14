@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.microfian.prac.web.mapper.CProjectPOMapper">
+<mapper namespace="com.microFian.prac.web.mapper.CProjectPOMapper">
 
-  <resultMap id="BaseResultMap" type="com.microfian.prac.web.entity.CProjectPO">
+  <resultMap id="BaseResultMap" type="com.microFian.prac.web.entity.CProjectPO">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
@@ -22,7 +22,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectProject" parameterType="com.microfian.prac.web.entity.CProjectPO" resultMap="BaseResultMap">
+  <select id="selectProject" parameterType="com.microFian.prac.web.entity.CProjectPO" resultMap="BaseResultMap">
     select
         <include refid="Base_Column_List" />
     from
@@ -37,7 +37,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.microfian.prac.web.entity.CProjectPO">
+  <insert id="insert" parameterType="com.microFian.prac.web.entity.CProjectPO">
     insert into c_project (id, project_name, create_time, 
       update_time, is_available, is_deleted
       )
@@ -46,7 +46,7 @@
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.microfian.prac.web.entity.CProjectPO">
+  <insert id="insertSelective" parameterType="com.microFian.prac.web.entity.CProjectPO">
     insert into c_project
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -90,7 +90,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.microfian.prac.web.entity.CProjectPO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.microFian.prac.web.entity.CProjectPO">
     update c_project
     <set>
       <if test="projectName != null">
@@ -112,7 +112,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.microfian.prac.web.entity.CProjectPO">
+  <update id="updateByPrimaryKey" parameterType="com.microFian.prac.web.entity.CProjectPO">
     update c_project
     set project_name = #{projectName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},

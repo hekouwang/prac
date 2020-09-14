@@ -1,11 +1,11 @@
-package com.microfian.prac.web.service;
+package com.microFian.prac.web.service;
 
 
 
-import com.microfian.prac.web.DTO.CConsumeItemDTO;
-import com.microfian.prac.web.DTO.ClassifyAndConsumeReturnDTO;
-import com.microfian.prac.web.DTO.ResCConsumeItem;
-import com.microfian.prac.web.request.ReqClassify;
+import com.microFian.prac.web.DTO.CConsumeItemDTO;
+import com.microFian.prac.web.DTO.ClassifyAndConsumeReturnDTO;
+import com.microFian.prac.web.DTO.ResCConsumeItem;
+import com.microFian.prac.web.request.ReqClassify;
 
 import java.util.List;
 
