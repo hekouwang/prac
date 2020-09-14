@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 任何请求需要身份认证
         registry.and()
                 .authorizeRequests()
+//                .antMatchers("/user/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 // 关闭跨站请求防护及不使用session
