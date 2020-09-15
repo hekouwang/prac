@@ -6,6 +6,8 @@ import com.microFian.prac.web.mapper.UserResourceMapper;
 import com.microFian.prac.web.service.UserResourceService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 后台资源表 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserResourceServiceImpl extends ServiceImpl<UserResourceMapper, UserResource> implements UserResourceService {
 
+    @Override
+    public List<UserResource> listAll() {
+       return list();
+    }
 }

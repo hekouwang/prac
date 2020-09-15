@@ -61,12 +61,12 @@
             ur.description description,
             ur.category_id categoryId
         FROM
-            ums_admin_role_relation ar
-        LEFT JOIN ums_role r ON ar.role_id = r.id
-        LEFT JOIN ums_role_resource_relation rrr ON r.id = rrr.role_id
-        LEFT JOIN ums_resource ur ON ur.id = rrr.resource_id
+            c_user_role_relation cr
+        LEFT JOIN c_user_role r ON cr.role_id = r.id
+        LEFT JOIN c_user_role_resource_relation rrr ON r.id = rrr.role_id
+        LEFT JOIN c_user_resource ur ON ur.id = rrr.resource_id
         WHERE
-            ar.admin_id = #{adminId}
+            cr.user_id = #{adminId}
         AND ur.id IS NOT NULL
         GROUP BY
             ur.id
