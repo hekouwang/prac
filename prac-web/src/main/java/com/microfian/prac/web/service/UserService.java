@@ -3,6 +3,7 @@ package com.microFian.prac.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.microFian.prac.web.entity.UserAdmin;
 import com.microFian.prac.web.entity.UserResource;
+import com.microFian.prac.web.entity.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -37,5 +38,12 @@ public interface UserService extends IService<UserAdmin> {
      * 获取指定用户的可访问资源
      */
     List<UserResource> getResourceList(Long adminId);
+
+    /**
+     * 获取指定用户的角色
+     */
+    List<UserRole> getRoleList(Integer userId);
+
+
 
 }

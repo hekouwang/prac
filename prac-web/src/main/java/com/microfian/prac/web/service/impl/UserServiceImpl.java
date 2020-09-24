@@ -7,7 +7,10 @@ import com.microFian.prac.security.util.JwtTokenUtil;
 import com.microFian.prac.web.bo.AdminUserDetails;
 import com.microFian.prac.web.entity.UserAdmin;
 import com.microFian.prac.web.entity.UserResource;
+import com.microFian.prac.web.entity.UserRole;
+import com.microFian.prac.web.entity.UserRoleRelation;
 import com.microFian.prac.web.mapper.UserMapper;
+import com.microFian.prac.web.mapper.UserRoleMapper;
 import com.microFian.prac.web.mapper.UserRoleRelationMapper;
 import com.microFian.prac.web.service.UserService;
 import org.apache.commons.collections.CollectionUtils;
@@ -23,7 +26,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 
@@ -47,6 +52,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserAdmin> implemen
 
     @Autowired
     UserRoleRelationMapper userRoleRelationMapper;
+
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @Override
     public UserAdmin getAdminByUsername(String username) {
@@ -104,6 +112,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserAdmin> implemen
 
         return userRoleRelationMapper.getResourceList(adminId);
 
+    }
+
+    @Override
+    public List<UserRole> getRoleList(Integer userId) {
+
+        List<UserRole> list=new ArrayList<>();
+        QueryWrapper<UserRoleRelation> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        List<UserRoleRelation> userRoleRelationList = userRoleRelationMapper.selectList(queryWrapper);
+        if(CollectionUtils.isNotEmpty(userRoleRelationList)){
+            list = userRoleMapper.selectBatchIds(
+                    userRoleRelationList.stream().map(UserRoleRelation::getUserId).collect(Collectors.toList()));
+        }
+
+        return list;
     }
 
 }

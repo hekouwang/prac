@@ -1,6 +1,9 @@
 package com.microFian.prac.web.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import com.microFian.prac.common.api.CommonResult;
+import com.microFian.prac.web.entity.UserAdmin;
+import com.microFian.prac.web.entity.UserRole;
 import com.microFian.prac.web.request.UmsAdminLoginParam;
 import com.microFian.prac.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +11,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -41,18 +47,22 @@ public class UserController {
 
 
     @GetMapping(value = "/info")
-    public Object info(){
-        Map<String, Object> map=new HashMap<String ,Object>();
-        map.put("code",20000);
-        Map<String, Object> map1=new HashMap<String,Object>();
-        map1.put("token","admin-token");
-        map1.put("introduction","I am a super administrator");
-        map1.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        map1.put("name","Super Admin");
-        String[] arg={"admin"};
-        map.put("data",map1);
-        map1.put("roles",arg);
-        return map;
+    public Object info(Principal principal){
+        if(principal==null){
+            return CommonResult.unauthorized(null);
+        }
+        String username = principal.getName();
+        UserAdmin umsAdmin = userService.getAdminByUsername(username);
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", umsAdmin.getUsername());
+//        data.put("menus", roleService.getMenuList(umsAdmin.getId()));
+//        data.put("icon", umsAdmin.getIcon());
+        List<UserRole> roleList = userService.getRoleList(umsAdmin.getId());
+        if(CollUtil.isNotEmpty(roleList)){
+            List<String> roles = roleList.stream().map(UserRole::getRolename).collect(Collectors.toList());
+            data.put("roles",roles);
+        }
+        return CommonResult.success(data);
     }
 }
 
