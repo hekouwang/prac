@@ -6,10 +6,7 @@ import com.microFian.prac.web.request.ReqAccount;
 import com.microFian.prac.web.response.Result;
 import com.microFian.prac.web.service.CAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -91,6 +88,18 @@ public class CAccountController {
 
         try {
             return cAccountService.listWishAccount();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.success();
+
+    }
+
+    @GetMapping(value = "/getTotalMoney")
+    public Object getTotalMoney() {
+
+        try {
+            return cAccountService.getTotalMoney();
         } catch (Exception e) {
             e.printStackTrace();
         }

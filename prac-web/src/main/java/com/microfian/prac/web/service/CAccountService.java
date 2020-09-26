@@ -31,4 +31,7 @@ public interface CAccountService {
     Result<List<ResAccount>> getByIdOrParentId(ReqAccount reqAccount);
 
 
+    CommonResult getTotalMoney();
+
+
 }

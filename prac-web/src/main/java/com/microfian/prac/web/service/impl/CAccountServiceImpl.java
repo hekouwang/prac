@@ -3,6 +3,7 @@ package com.microFian.prac.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.microFian.prac.common.api.CommonResult;
 import com.microFian.prac.web.DTO.CAccountDTO;
+import com.microFian.prac.web.DTO.TotalCount;
 import com.microFian.prac.web.entity.Account;
 import com.microFian.prac.web.entity.Classify;
 import com.microFian.prac.web.mapper.AccountMapper;
@@ -207,6 +208,43 @@ public class CAccountServiceImpl implements CAccountService {
             resAccountList.add(resAccount);
         }
         return Result.success(resAccountList);
+
+    }
+
+    @Override
+    public CommonResult<TotalCount> getTotalMoney() {
+
+        TotalCount totalCount=new TotalCount();
+        BigDecimal totalIncome = new BigDecimal("0");
+        BigDecimal totalExpense= new BigDecimal("0");
+        BigDecimal toalRemain= new BigDecimal("0");
+
+        //查询总资产
+        QueryWrapper<Account> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("is_available",1);
+        queryWrapper.eq("is_deleted",0);
+        queryWrapper.eq("account_type",1);
+        List<Account> list= accountMapper.selectList(queryWrapper);
+        for(Account account:list){
+            totalIncome=totalIncome.add(account.getBalance());
+        }
+
+        //查询总负债
+        QueryWrapper<Account> queryWrapper1=new QueryWrapper<>();
+        queryWrapper1.eq("is_available",1);
+        queryWrapper1.eq("is_deleted",0);
+        queryWrapper1.eq("account_type",2);
+        List<Account> list1= accountMapper.selectList(queryWrapper1);
+        for(Account account:list1){
+            totalExpense=totalExpense.add(account.getBalance());
+        }
+        
+        //净资产
+        toalRemain=totalIncome.subtract(totalExpense);
+        totalCount.setTotalIncome(totalIncome);
+        totalCount.setTotalExpense(totalExpense);
+        totalCount.setToalRemain(toalRemain);
+        return CommonResult.success(totalCount);
 
     }
 }
