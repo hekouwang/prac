@@ -2,7 +2,10 @@ package com.microFian.prac.web.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.microFian.prac.web.entity.UserMenu;
 import com.microFian.prac.web.entity.UserRole;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,6 +17,10 @@ import com.microFian.prac.web.entity.UserRole;
  */
 public interface UserRoleService extends IService<UserRole> {
 
+    /**
+     * 根据管理员ID获取对应菜单
+     */
+    List<UserMenu> getMenuList(Long adminId);
 
 
 }

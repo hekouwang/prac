@@ -5,6 +5,7 @@ import com.microFian.prac.common.api.CommonResult;
 import com.microFian.prac.web.entity.UserAdmin;
 import com.microFian.prac.web.entity.UserRole;
 import com.microFian.prac.web.request.UmsAdminLoginParam;
+import com.microFian.prac.web.service.UserRoleService;
 import com.microFian.prac.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
 //    @ApiOperation(value = "登录以后返回token")
     @PostMapping(value = "/login")
@@ -55,7 +59,7 @@ public class UserController {
         UserAdmin umsAdmin = userService.getAdminByUsername(username);
         Map<String, Object> data = new HashMap<>();
         data.put("username", umsAdmin.getUsername());
-//        data.put("menus", roleService.getMenuList(umsAdmin.getId()));
+        data.put("menus", userRoleService.getMenuList(umsAdmin.getId().longValue()));
 //        data.put("icon", umsAdmin.getIcon());
         List<UserRole> roleList = userService.getRoleList(umsAdmin.getId());
         if(CollUtil.isNotEmpty(roleList)){
