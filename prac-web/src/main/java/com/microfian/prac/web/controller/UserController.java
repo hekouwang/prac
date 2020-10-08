@@ -1,40 +1,72 @@
 package com.microFian.prac.web.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import cn.hutool.core.collection.CollUtil;
+import com.microFian.prac.common.api.CommonResult;
+import com.microFian.prac.web.entity.UserAdmin;
+import com.microFian.prac.web.entity.UserRole;
+import com.microFian.prac.web.request.UmsAdminLoginParam;
+import com.microFian.prac.web.service.UserRoleService;
+import com.microFian.prac.web.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserRoleService userRoleService;
+
+//    @ApiOperation(value = "登录以后返回token")
     @PostMapping(value = "/login")
-    public Object addAccount(){
-        Map<String, Object> map=new HashMap<String ,Object>();
-        map.put("code",20000);
-        Map<String, String> map1=new HashMap<String,String>();
-        map1.put("token","admin-token");
-        map.put("data",map1);
-        return map;
+    @ResponseBody
+    public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam) {
+
+        String token = userService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
+        if (token == null) {
+            return CommonResult.validateFailed("用户名或密码错误");
+        }
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", token);
+        tokenMap.put("tokenHead", tokenHead);
+        return CommonResult.success(tokenMap);
+
     }
 
+
     @GetMapping(value = "/info")
-    public Object info(){
-        Map<String, Object> map=new HashMap<String ,Object>();
-        map.put("code",20000);
-        Map<String, Object> map1=new HashMap<String,Object>();
-        map1.put("token","admin-token");
-        map1.put("introduction","I am a super administrator");
-        map1.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        map1.put("name","Super Admin");
-        String[] arg={"admin"};
-        map.put("data",map1);
-        map1.put("roles",arg);
-        return map;
+    public Object info(Principal principal){
+        if(principal==null){
+            return CommonResult.unauthorized(null);
+        }
+        String username = principal.getName();
+        UserAdmin umsAdmin = userService.getAdminByUsername(username);
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", umsAdmin.getUsername());
+        data.put("menus", userRoleService.getMenuList(umsAdmin.getId().longValue()));
+//        data.put("icon", umsAdmin.getIcon());
+        List<UserRole> roleList = userService.getRoleList(umsAdmin.getId());
+        if(CollUtil.isNotEmpty(roleList)){
+            List<String> roles = roleList.stream().map(UserRole::getRolename).collect(Collectors.toList());
+            data.put("roles",roles);
+        }
+        return CommonResult.success(data);
     }
 }
 

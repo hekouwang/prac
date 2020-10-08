@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,10 +27,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHeader}")
-    private String tokenHeader;
+    private  String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
@@ -37,7 +39,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
-        String authHeader = request.getHeader(this.tokenHeader);
+        System.out.println(tokenHeader);
+//        String authHeader = request.getHeader("Authorization");
+//        System.out.println(authHeader);
+        String authHeader = request.getHeader(tokenHeader);
+        System.out.println(authHeader);
         if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
             String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer "
             String username = jwtTokenUtil.getUserNameFromToken(authToken);
